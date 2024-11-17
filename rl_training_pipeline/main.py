@@ -1,32 +1,38 @@
 import rclpy
-from rclpy.executors import MultiThreadedExecutor
-from user_cli import UserCLI
+
 import gymnasium as gym
-from inverted_pendulum_env import InvertedPendulumEnv
+
+from rclpy.node import Node
 from config import ValidMode
+from user_cli import UserCLI
+from ros_node_manage import RosNodeManager
+from rl_training_pipeline.stable_baselines3.ppo_model_manage import PPOModelManager
 
-class MainProcessor:
-    def __init__(self):
-        self.user_cli = UserCLI()
-
-    def _register_gym_env(self) -> gym.Env:
-        gym.register(
-            id = InvertedPendulumEnv.ENV_NAME,
-            entry_point = "inverted_pendulum_env:InvertedPendulumEnv",
-        )
-        return gym.make(InvertedPendulumEnv.ENV_NAME)
+def main() -> None:
+    rclpy.init()
+    ros_node_manager = RosNodeManager()
+    user_cli = UserCLI()
+    ppo_model_manager = PPOModelManager()
+    all_ros_nodes: dict[str, Node] = ros_node_manager.get_all_ros_nodes()
     
-    def _train_model(self, env: gym.Env) -> None:
-        pass
+    try:
+        ros_node_manager.start_multi_threaded_executor()
+        user_cli.execute_user_cli()
+        user_input_mode: str = user_cli.get_user_input_mode()
+
+        env: gym.Env =  ppo_model_manager.register_gym_env(all_ros_nodes)
+
+        if user_input_mode == ValidMode.TRAIN.value:
+            ppo_model_manager.train_model(env)
+    
+    except KeyboardInterrupt:
+        print("Shutting down...")
+        
+    finally:
+        ros_node_manager.shotdown_multi_threaded_executor()
+        
+    rclpy.shutdown()
+    return None
 
 if __name__ == "__main__":
-    main_processor = MainProcessor()
-    
-    main_processor.user_cli.execute_user_cli()
-    user_input_mode: str = main_processor.user_cli.get_user_input_mode()
-
-    env: gym.Env =  main_processor._register_gym_env()
-
-    if user_input_mode == ValidMode.TRAIN.value:
-        main_processor._train_model(env)
-
+    main()

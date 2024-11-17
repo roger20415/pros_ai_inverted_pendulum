@@ -1,6 +1,6 @@
 from rclpy.node import Node
-from data_transformer import DataTransformer
-from rl_training_pipeline.subscribe_data.data_subscriber import DataSubscriberNode
+from rl_training_pipeline.subscribe_data.data_transforme import DataTransformer
+from rl_training_pipeline.subscribe_data.data_subscribe import DataSubscriberNode
 from subscribe_data.unity_data_store import UnityDataStore
 
 class DataManager:
@@ -15,9 +15,9 @@ class DataManager:
         
         self.unity_data_store.turn_all_data_flag_to_unready()
         self.unity_data_store.wait_all_data_ready()
-        self.observation_state: dict[str, float] = self.data_transformer.transform_untiy_data_to_state()
+        observation_state: dict[str, float] = self.data_transformer.transform_untiy_data_to_state()
         
-        return self.observation_state
+        return observation_state
     
     def get_data_subscriber_node(self) -> Node:
         return self.data_subscriber
