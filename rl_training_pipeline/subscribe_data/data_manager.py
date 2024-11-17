@@ -1,12 +1,13 @@
+from rclpy.node import Node
 from data_transformer import DataTransformer
-from inverted_pendulum_subscriber import InvertedPendulumSubscriberNode
+from rl_training_pipeline.subscribe_data.data_subscriber import DataSubscriberNode
 from subscribe_data.unity_data_store import UnityDataStore
 
 class DataManager:
     def __init__(self) -> None:
         self.unity_data_store = UnityDataStore()
         self.data_transformer = DataTransformer(self.unity_data_store)
-        self.Inverted_pendulum_subscriber = InvertedPendulumSubscriberNode(self.unity_data_store)
+        self.data_subscriber = DataSubscriberNode(self.unity_data_store)
         
         return None
         
@@ -17,5 +18,7 @@ class DataManager:
         self.observation_state: dict[str, float] = self.data_transformer.transform_untiy_data_to_state()
         
         return self.observation_state
-        
+    
+    def get_data_subscriber_node(self) -> Node:
+        return self.data_subscriber
             
