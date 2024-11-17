@@ -6,7 +6,7 @@ class ActionPublisherNode(Node):
         super().__init__('inverted_pendulum_action_publisher_node')
         self.get_logger().info("Start inverted pendulum action publisher node.")
         
-        self._joint_target_publisher = self.create_publisher(
+        self._target_joint_angles_publisher = self.create_publisher(
             JointTrajectoryPoint,
             '/inverted_pendulum_joint_target',
             10
@@ -14,10 +14,10 @@ class ActionPublisherNode(Node):
         
         return None
         
-    def publish_joint_targets(self, joint_targets: list[float]) -> None:
+    def publish_target_joint_angles(self, target_joint_angles: list[float]) -> None:
         msg = JointTrajectoryPoint()
-        msg.positions = joint_targets
-        msg.velocities = [0.0] * len(joint_targets)
-        self._joint_target_publisher.publish(msg)
+        msg.positions = target_joint_angles
+        msg.velocities = [0.0] * len(target_joint_angles)
+        self._target_joint_angles_publisher.publish(msg)
  
         return None

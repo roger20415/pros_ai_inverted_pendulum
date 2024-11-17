@@ -1,5 +1,4 @@
 import numpy as np
-from threading import Thread
 from action_transformer import ActionTransformer
 from action_publisher import ActionPublisherNode
 from rclpy.node import Node
@@ -9,12 +8,13 @@ class ActionManager:
         self.action_transformer = action_transformer
         self.action_publisher = action_publisher
         
+        return None
         
-    def publish_action(self, action: np.ndarray, current_joint_positions: list[float]) -> None:
-        joints_targets: list[float] = self.action_transformer.transform_action_to_joint_targets(
+    def process_and_publish_actions(self, action: np.ndarray, current_joint_positions: list[float]) -> None:
+        target_joint_angles: list[float] = self.action_transformer.transfer_actions_to_target_joint_angles(
             action, current_joint_positions)
         
-        self.action_publisher.publish_joint_targets(joints_targets)
+        self.action_publisher.publish_target_joint_angles(target_joint_angles)
         
         return None
     
