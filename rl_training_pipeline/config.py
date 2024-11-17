@@ -15,3 +15,8 @@ class Config:
 
     # PPO training
     ACTION_NVEC: list[int] = [2]
+    
+    
+    # action
+    JOINT_DELTA_UNIT: float = 0.5 # 
+    MAX_JOINT_ANGLE: float = 120.0 # degrees
