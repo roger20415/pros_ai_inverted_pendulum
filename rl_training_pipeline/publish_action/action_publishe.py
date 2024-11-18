@@ -9,7 +9,7 @@ class ActionPublisherNode(Node):
         
         self._target_joint_angles_publisher = self.create_publisher(
             JointTrajectoryPoint,
-            '/inverted_pendulum_joint_target',
+            '/inverted_pendulum_target_joint_angles',
             10
         )
         

@@ -7,7 +7,7 @@ class UnityDataStore:
         self._recieved_unity_data: dict[str, Float32MultiArray] = {}
         
         self._if_data_ready_flags: dict[str, bool] = {
-            "calf_angle": False
+            "current_joint_angles": False
         }
     
     def get_unity_data(self) -> dict:
@@ -20,10 +20,11 @@ class UnityDataStore:
     
     def wait_all_data_ready(self) -> None:
         
-        i = 0 # calculators
+        i = 0 # time calculators
         while (not self._check_if_all_data_ready()):
-            if (i % 900000000 == 0) and (i != 0):
+            if (i % 10000000 == 0) and (i != 0):
                 print("\nwaiting for data ...")
+            i += 1
         return None
         
     def turn_all_data_flag_to_unready(self) -> None:

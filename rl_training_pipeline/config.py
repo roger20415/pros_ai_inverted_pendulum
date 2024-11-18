@@ -28,5 +28,5 @@ class Config:
     
     
     # action
-    JOINT_DELTA_UNIT: float = 0.5 # 
+    JOINT_DELTA_UNIT: float = 10.5 # 
     MAX_JOINT_ANGLE: float = 120.0 # degrees

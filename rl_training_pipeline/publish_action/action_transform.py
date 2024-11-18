@@ -1,18 +1,13 @@
-import math
-
 import numpy as np
 
 from config import Config
-from utils import Utils
 
 class ActionTransformer:
-    
     def transfer_actions_to_target_joint_angles(self, actions: np.ndarray, current_joint_positions: list[float]) -> list[float]:
         
         joint_angle_deltas = self._convert_actions_to_joint_angle_deltas(actions)
         target_joint_angles = self._calculate_target_joint_angles(joint_angle_deltas, current_joint_positions)
         target_joint_angles = self._limit_target_joint_angles(target_joint_angles)
-        target_joint_angles = Utils.radians_degrees_transfer(target_joint_angles, "degrees2radians")
         
         return target_joint_angles
     
@@ -32,7 +27,6 @@ class ActionTransformer:
         return joint_angle_deltas
     
     def _calculate_target_joint_angles(self, joint_angle_deltas: list[float], current_joint_angles: list[float]) -> list[float]:
-        
         return np.add(joint_angle_deltas, current_joint_angles).tolist()
     
     def _limit_target_joint_angles(self, target_joint_angles: list[float]) -> list[float]:
@@ -52,8 +46,8 @@ class ActionTransformer:
 
         limited_target_joint_angles_array: np.ndarray = np.clip(
             target_joint_angles,
-            math.radians(-Config.MAX_JOINT_ANGLE),
-            math.radians(Config.MAX_JOINT_ANGLE)
+            -Config.MAX_JOINT_ANGLE,
+            Config.MAX_JOINT_ANGLE
         )
         
         target_joint_angles: list[float] = limited_target_joint_angles_array.tolist()

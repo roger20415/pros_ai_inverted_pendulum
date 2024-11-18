@@ -1,7 +1,6 @@
 import os
 import logging
 
-from rclpy.node import Node
 import gymnasium as gym
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import BaseCallback
@@ -17,16 +16,16 @@ class PPOModelManager:
         
         gym.register(
             id = InvertedPendulumEnv.ENV_NAME,
-            entry_point = "inverted_pendulum_env:InvertedPendulumEnv",
+            entry_point = "rl_package.inverted_pendulum_env:InvertedPendulumEnv",
         )
-        return gym.make(InvertedPendulumEnv.ENV_NAME, data_manager, action_manager)
+        return gym.make(InvertedPendulumEnv.ENV_NAME, data_manager=data_manager, action_manager=action_manager)
     
     def train_model(self, env: gym.Env) -> None:
         model = self._load_or_create_model(env)
         check_point_callback = CheckPointCallback(Config.SAVE_MODEL_PATH, Config.SAVE_MODEL_FREQUENCY)
-        model.learn(total_timesteps = Config.TRAINING_STEPS, 
-                    callback = check_point_callback,
-                    log_interval = Config.LOG_INTERVAL)
+        model.learn(total_timesteps=Config.TRAINING_STEPS, 
+                    callback=check_point_callback,
+                    log_interval=Config.LOG_INTERVAL)
         
         return None
     
@@ -52,7 +51,7 @@ class CheckPointCallback(BaseCallback):
     def __init__(self, save_path: str, save_freq: int, verbose: int = 0) -> None:
         super(CheckPointCallback, self).__init__(verbose)
         
-        self.logger = logging.getLogger(__name__)
+        #self.logger = logging.getLogger(__name__)
         logging.basicConfig(level = logging.INFO)
         
         self._save_path: str = save_path

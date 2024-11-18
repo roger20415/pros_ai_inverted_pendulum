@@ -26,7 +26,7 @@ def main() -> None:
         user_input_mode: str = user_cli.get_user_input_mode()
 
         ros_node_manager.start_multi_threaded_executor()
-        env: gym.Env =  ppo_model_manager.register_gym_env(all_ros_nodes)
+        env: gym.Env =  ppo_model_manager.register_gym_env(data_manager, action_manager)
 
         if user_input_mode == ValidMode.TRAIN.value:
             ppo_model_manager.train_model(env)

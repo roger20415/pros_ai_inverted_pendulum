@@ -13,7 +13,7 @@ class DataManager:
         return None
         
     def get_obervation(self) -> dict[str, float]:
-        
+         
         self.unity_data_store.turn_all_data_flag_to_unready()
         self.unity_data_store.wait_all_data_ready()
         observation_state: dict[str, float] = self.data_transformer.transform_untiy_data_to_state()

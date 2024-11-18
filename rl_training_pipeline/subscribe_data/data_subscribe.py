@@ -10,15 +10,15 @@ class DataSubscriberNode(Node):
 
         self._unity_data_store = unity_data_store
 
-        self._calf_angle_subscriber = self.create_subscription(
+        self._current_joint_angles_subscriber = self.create_subscription(
             Float32MultiArray,
-            "/inverted_pendulum_calf_angle",
-            self._inverted_pendulum_calf_angle_subscribe_callback,
+            "/inverted_pendulum_current_joint_angles",
+            self._current_joint_angles_subscribe_callback,
             1
         )
         return None
 
-    def _inverted_pendulum_calf_angle_subscribe_callback(self, msg: Float32MultiArray) -> None:
-        self._unity_data_store.store_received_data("calf_angle", msg.data)
+    def _current_joint_angles_subscribe_callback(self, msg: Float32MultiArray) -> None:
+        self._unity_data_store.store_received_data("current_joint_angles", msg.data)
         
         return None

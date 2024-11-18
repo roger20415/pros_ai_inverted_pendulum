@@ -12,27 +12,25 @@ class InvertedPendulumEnv(gym.Env):
 
     def __init__(self, data_manager: DataManager, action_manager: ActionManager) -> None:
         super(InvertedPendulumEnv, self).__init__()
-        
+
         self._data_manager = data_manager
         self._action_manager = action_manager
         
         self._state_dict: dict[str, float] = {}
         self._state_array: np.ndarray[np.float32] = np.array([])
-           
+
         self._update_state()
         self._observation_shape: int = len(self._state_array)
         
-        self._observation_space = spaces.Box(
-            low = -np.inf, high = np.inf, shape = self._observation_shape, dtype = np.float32
+        self.observation_space = spaces.Box(
+            low=-np.inf, high=np.inf, shape=(self._observation_shape,), dtype=np.float32
         )
-
-        self._action_space = spaces.MultiDiscrete(Config.ACTION_NVEC)
+        self.action_space = spaces.MultiDiscrete(Config.ACTION_NVEC)
+        return None
 
     def step(self, action):
         self._action_manager.process_and_publish_actions(action, [self._state_dict.get("calf_angle", 0)])
-        
         self._update_state()
-        
         # TODO: Compute reward and termination conditions
         reward: int = 0
         terminated: bool = False
