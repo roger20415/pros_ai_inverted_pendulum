@@ -20,7 +20,19 @@ class ActionTransformer:
             elif action == 1:
                 joint_angle_deltas.append(Config.JOINT_DELTA_UNIT)
             elif action == 2:
+                joint_angle_deltas.append(2 * Config.JOINT_DELTA_UNIT)
+            elif action == 3:
+                joint_angle_deltas.append(4 * Config.JOINT_DELTA_UNIT)
+            elif action == 4:
+                joint_angle_deltas.append(8 * Config.JOINT_DELTA_UNIT)
+            elif action == 5:
                 joint_angle_deltas.append(-Config.JOINT_DELTA_UNIT)
+            elif action == 6:
+                joint_angle_deltas.append(-2 * Config.JOINT_DELTA_UNIT)
+            elif action == 7:
+                joint_angle_deltas.append(-4 * Config.JOINT_DELTA_UNIT)
+            elif action == 8:
+                joint_angle_deltas.append(-8 * Config.JOINT_DELTA_UNIT)
             else:
                 raise ValueError("Invalid action value: {}".format(action))
             

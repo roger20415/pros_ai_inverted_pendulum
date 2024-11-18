@@ -16,9 +16,21 @@ class DataSubscriberNode(Node):
             self._current_joint_angles_subscribe_callback,
             1
         )
+
+        self._joint_center_of_mass_subscriber = self.create_subscription(
+            Float32MultiArray,
+            "/inverted_pendulum_joint_center_of_mass",
+            self._joint_center_of_mass_subscribe_callback,
+            1
+        )
         return None
 
     def _current_joint_angles_subscribe_callback(self, msg: Float32MultiArray) -> None:
         self._unity_data_store.store_received_data("current_joint_angles", msg.data)
+        
+        return None
+    
+    def _joint_center_of_mass_subscribe_callback(self, msg: Float32MultiArray) -> None:
+        self._unity_data_store.store_received_data("joint_center_of_mass", msg.data)
         
         return None

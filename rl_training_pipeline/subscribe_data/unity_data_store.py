@@ -7,7 +7,8 @@ class UnityDataStore:
         self._recieved_unity_data: dict[str, Float32MultiArray] = {}
         
         self._if_data_ready_flags: dict[str, bool] = {
-            "current_joint_angles": False
+            "current_joint_angles": False,
+            "joint_center_of_mass": False
         }
     
     def get_unity_data(self) -> dict:
