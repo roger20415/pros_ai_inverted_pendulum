@@ -1,5 +1,6 @@
-from subscribe_data.unity_data_store import UnityDataStore
 from std_msgs.msg import Float32MultiArray
+
+from subscribe_data.unity_data_store import UnityDataStore
 
 class DataTransformer():
     def __init__(self, unity_data_store: UnityDataStore) -> None:

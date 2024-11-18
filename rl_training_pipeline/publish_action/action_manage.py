@@ -1,12 +1,13 @@
 import numpy as np
-from rl_training_pipeline.publish_action.action_transforme import ActionTransformer
-from rl_training_pipeline.publish_action.action_publishe import ActionPublisherNode
 from rclpy.node import Node
 
+from publish_action.action_transform import ActionTransformer
+from publish_action.action_publishe import ActionPublisherNode
+
 class ActionManager:
-    def __init__(self, action_transformer: ActionTransformer, action_publisher: ActionPublisherNode) -> None:
-        self.action_transformer = action_transformer
-        self.action_publisher = action_publisher
+    def __init__(self) -> None:
+        self.action_transformer = ActionTransformer()
+        self.action_publisher = ActionPublisherNode()
         
         return None
         

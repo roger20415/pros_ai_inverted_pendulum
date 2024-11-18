@@ -1,20 +1,19 @@
 import os
 import logging
 
+from rclpy.node import Node
 import gymnasium as gym
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.monitor import Monitor
-from rclpy.node import Node
 
-from rl_training_pipeline.stable_baselines3.inverted_pendulum_env import InvertedPendulumEnv
+from rl_package.inverted_pendulum_env import InvertedPendulumEnv
 from config import Config
+from subscribe_data.data_manage import DataManager
+from publish_action.action_manage import ActionManager
 
 class PPOModelManager:
-
-    def register_gym_env(self, all_ros_nodes: dict[str, Node]) -> gym.Env:
-        data_manager: Node = all_ros_nodes["data_subscriber_node"]
-        action_manager: Node = all_ros_nodes["action_publisher_node"]
+    def register_gym_env(self, data_manager: DataManager, action_manager: ActionManager) -> gym.Env:
         
         gym.register(
             id = InvertedPendulumEnv.ENV_NAME,

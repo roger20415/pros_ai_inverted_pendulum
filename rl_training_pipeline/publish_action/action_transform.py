@@ -1,5 +1,7 @@
-import numpy as np
 import math
+
+import numpy as np
+
 from config import Config
 from utils import Utils
 

@@ -1,4 +1,5 @@
 from rclpy.node import Node
+
 from trajectory_msgs.msg import JointTrajectoryPoint
 
 class ActionPublisherNode(Node):
