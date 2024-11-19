@@ -10,27 +10,35 @@ class DataSubscriberNode(Node):
 
         self._unity_data_store = unity_data_store
 
-        self._current_joint_angles_subscriber = self.create_subscription(
+        self._calf_angle_subscriber = self.create_subscription(
             Float32MultiArray,
-            "/inverted_pendulum_current_joint_angles",
-            self._current_joint_angles_subscribe_callback,
+            "/inverted_pendulum_calf_angle",
+            lambda msg: self._subscribe_callback("calf_angle", msg),
             1
         )
 
-        self._joint_center_of_mass_subscriber = self.create_subscription(
+        self._foundation_angle_subscriber = self.create_subscription(
             Float32MultiArray,
-            "/inverted_pendulum_joint_center_of_mass",
-            self._joint_center_of_mass_subscribe_callback,
+            "/inverted_pendulum_foundation_angle",
+            lambda msg: self._subscribe_callback("foundation_angle", msg),
             1
         )
-        return None
 
-    def _current_joint_angles_subscribe_callback(self, msg: Float32MultiArray) -> None:
-        self._unity_data_store.store_received_data("current_joint_angles", msg.data)
-        
-        return None
+        self._baselink_center_of_mass_subscriber = self.create_subscription(
+            Float32MultiArray,
+            "/inverted_pendulum_baselink_center_of_mass",
+            lambda msg: self._subscribe_callback("baselink_center_of_mass", msg),
+            1
+        )
     
-    def _joint_center_of_mass_subscribe_callback(self, msg: Float32MultiArray) -> None:
-        self._unity_data_store.store_received_data("joint_center_of_mass", msg.data)
-        
+        self._calf_center_of_mass_subscriber = self.create_subscription(
+            Float32MultiArray,
+            "/inverted_pendulum_calf_center_of_mass",
+            lambda msg: self._subscribe_callback("calf_center_of_mass", msg),
+            1
+        )
+        return None
+
+    def _subscribe_callback(self, key: str, msg: Float32MultiArray) -> None:
+        self._unity_data_store.store_received_data(key, msg)
         return None

@@ -22,22 +22,24 @@ class DataTransformer():
     def _decomposition_data(self, unity_data: dict[str, Float32MultiArray]) -> dict[str, float]:
         
         data_transformed: dict[str, float] = {
-           "calf_angle": unity_data["current_joint_angles"][0],
-           "foundation_angle": unity_data["current_joint_angles"][1],
+           "calf_angle": unity_data["calf_angle"][0],
+           "foundation_angle": unity_data["foundation_angle"][0],
            "center_of_mass": self._calculate_center_of_mass(unity_data)
         }
         
+        print(f"calf_angle: {data_transformed['calf_angle']}")
+        print(f"foundation_angle: {data_transformed['foundation_angle']}")
+
         return data_transformed
     
     def _calculate_center_of_mass(self, unity_data: dict[str, Float32MultiArray]) -> float:
         
-        center_of_mass: float = 0
         total_mass: float = Config.BASE_LINK_MASS + Config.CALF_MASS
-        weighted_mass: float = (unity_data["joint_center_of_mass"][0] * Config.BASE_LINK_MASS + 
-                                unity_data["joint_center_of_mass"][1] * Config.CALF_MASS)
+        weighted_mass: float = (unity_data["baselink_center_of_mass"][0] * Config.BASE_LINK_MASS + 
+                                unity_data["calf_center_of_mass"][0] * Config.CALF_MASS)
         if total_mass is 0:
             raise ValueError("Total mass is zero. Cannot calculate center of mass.")
-        center_of_mass = weighted_mass/total_mass
+        center_of_mass: float = weighted_mass/total_mass
 
         print(f"center_of_mass: {center_of_mass}")
 

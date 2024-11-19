@@ -1,4 +1,5 @@
 import copy
+
 from std_msgs.msg import Float32MultiArray
 
 class UnityDataStore:
@@ -7,17 +8,21 @@ class UnityDataStore:
         self._recieved_unity_data: dict[str, Float32MultiArray] = {}
         
         self._if_data_ready_flags: dict[str, bool] = {
-            "current_joint_angles": False,
-            "joint_center_of_mass": False
+            "calf_angle": False,
+            "foundation_angle": False,
+            "baselink_center_of_mass": False,
+            "calf_center_of_mass": False
         }
     
     def get_unity_data(self) -> dict:
         return copy.deepcopy(self._recieved_unity_data)
 
-    def store_received_data(self, key: str, value: Float32MultiArray) -> None:
-        self._recieved_unity_data[key] = value
+    def store_received_data(self, key: str, msg: Float32MultiArray) -> None:
+
+        self._recieved_unity_data[key] = msg.data
         self._turn_data_flag_to_ready(key)
         return None
+
     
     def wait_all_data_ready(self) -> None:
         

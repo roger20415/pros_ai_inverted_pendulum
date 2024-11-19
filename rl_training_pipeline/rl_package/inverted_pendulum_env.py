@@ -34,11 +34,13 @@ class InvertedPendulumEnv(gym.Env):
         self.action_manager.process_and_publish_actions(action, [self._state_dict.get("calf_angle", 0)])
         self._update_state()
         reward: float = self.reward_calculator.calculate_reward(self._state_dict)
-        terminated: bool = False
+        terminated: bool = self._should_terminate(self._state_dict)
 
         return self._state_array, reward, terminated, False, {}
 
-    def reset(self, seed = None, options = None):
+    def reset(self, seed=None, options=None):
+
+        print("1234\n\n\n\n\n\n\n\n")
         self._update_state()
         
         return self._state_array, {}
@@ -48,3 +50,12 @@ class InvertedPendulumEnv(gym.Env):
         self._state_array = Utils.flatten_dict_to_array(self._state_dict.copy())
         
         return None
+    
+    def _should_terminate(self, state: dict[str, float]) -> bool:
+        terminated: bool = False
+        foundation_angle: float = abs(state["foundation_angle"])
+        
+        if foundation_angle > Config.TERMINATE_THRESHOLD:
+            terminated = True
+        
+        return terminated
