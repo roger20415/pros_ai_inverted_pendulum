@@ -26,9 +26,6 @@ class DataTransformer():
            "foundation_angle": unity_data["foundation_angle"][0],
            "center_of_mass": self._calculate_center_of_mass(unity_data)
         }
-        
-        print(f"calf_angle: {data_transformed['calf_angle']}")
-        print(f"foundation_angle: {data_transformed['foundation_angle']}")
 
         return data_transformed
     
@@ -40,8 +37,6 @@ class DataTransformer():
         if total_mass is 0:
             raise ValueError("Total mass is zero. Cannot calculate center of mass.")
         center_of_mass: float = weighted_mass/total_mass
-
-        print(f"center_of_mass: {center_of_mass}")
 
         return center_of_mass
         

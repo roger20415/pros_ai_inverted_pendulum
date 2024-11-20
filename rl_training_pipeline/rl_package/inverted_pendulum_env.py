@@ -4,6 +4,7 @@ from gymnasium import spaces
 
 from publish_action.action_manage import ActionManager
 from subscribe_data.data_manage import DataManager
+from unity_state.unity_state_communication import UnityStateManagerNode
 from rl_package.reward_calculator import RewardCalculator
 from utils import Utils
 from config import Config
@@ -11,11 +12,12 @@ from config import Config
 class InvertedPendulumEnv(gym.Env):
     ENV_NAME: str = 'InvertedPendulum-v0'
 
-    def __init__(self, data_manager: DataManager, action_manager: ActionManager) -> None:
+    def __init__(self, data_manager: DataManager, action_manager: ActionManager, unity_state_manager: UnityStateManagerNode) -> None:
         super(InvertedPendulumEnv, self).__init__()
 
         self.data_manager = data_manager
         self.action_manager = action_manager
+        self.unity_state_manager = unity_state_manager
         self.reward_calculator = RewardCalculator()
         
         self._state_dict: dict[str, float] = {}
@@ -39,8 +41,11 @@ class InvertedPendulumEnv(gym.Env):
         return self._state_array, reward, terminated, False, {}
 
     def reset(self, seed=None, options=None):
+        self.unity_state_manager.set_is_training_paused(True)
+        self.unity_state_manager.publish_reset_unity_scene(True)
+        while(self.unity_state_manager.get_is_training_paused()):
+            pass
 
-        print("1234\n\n\n\n\n\n\n\n")
         self._update_state()
         
         return self._state_array, {}

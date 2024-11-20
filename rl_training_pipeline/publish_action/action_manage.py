@@ -2,7 +2,7 @@ import numpy as np
 from rclpy.node import Node
 
 from publish_action.action_transform import ActionTransformer
-from publish_action.action_publishe import ActionPublisherNode
+from publish_action.action_publish import ActionPublisherNode
 
 class ActionManager:
     def __init__(self) -> None:

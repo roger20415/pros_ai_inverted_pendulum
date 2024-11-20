@@ -8,17 +8,22 @@ from stable_baselines3.common.monitor import Monitor
 
 from rl_package.inverted_pendulum_env import InvertedPendulumEnv
 from config import Config
+from unity_state.unity_state_communication import UnityStateManagerNode
 from subscribe_data.data_manage import DataManager
 from publish_action.action_manage import ActionManager
 
 class PPOModelManager:
-    def register_gym_env(self, data_manager: DataManager, action_manager: ActionManager) -> gym.Env:
+    def register_gym_env(self, data_manager: DataManager, action_manager: ActionManager, unity_state_manager: UnityStateManagerNode) -> gym.Env:
         
         gym.register(
             id = InvertedPendulumEnv.ENV_NAME,
             entry_point = "rl_package.inverted_pendulum_env:InvertedPendulumEnv",
         )
-        return gym.make(InvertedPendulumEnv.ENV_NAME, data_manager=data_manager, action_manager=action_manager)
+        return gym.make(
+            InvertedPendulumEnv.ENV_NAME, 
+            data_manager=data_manager, 
+            action_manager=action_manager, 
+            unity_state_manager=unity_state_manager)
     
     def train_model(self, env: gym.Env) -> None:
         model = self._load_or_create_model(env)

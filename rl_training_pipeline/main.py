@@ -8,6 +8,7 @@ from ros_node_manage import RosNodeManager
 from rl_package.ppo_model_manage import PPOModelManager
 from subscribe_data.data_manage import DataManager
 from publish_action.action_manage import ActionManager
+from unity_state.unity_state_communication import UnityStateManagerNode
 
 def main() -> None:
     rclpy.init()
@@ -15,9 +16,11 @@ def main() -> None:
     ppo_model_manager = PPOModelManager()
     data_manager = DataManager()
     action_manager = ActionManager()
+    unity_state_manager = UnityStateManagerNode()
     all_ros_nodes: dict[str, Node] = {
         "data_subscriber": data_manager.get_data_subscriber_node(),
-        "action_publisher": action_manager.get_action_publisher_node()
+        "action_publisher": action_manager.get_action_publisher_node(),
+        "unity_state_manager": unity_state_manager
     }
     ros_node_manager = RosNodeManager(all_ros_nodes)
     
@@ -26,7 +29,7 @@ def main() -> None:
         user_input_mode: str = user_cli.get_user_input_mode()
 
         ros_node_manager.start_multi_threaded_executor()
-        env: gym.Env =  ppo_model_manager.register_gym_env(data_manager, action_manager)
+        env: gym.Env =  ppo_model_manager.register_gym_env(data_manager, action_manager, unity_state_manager)
 
         if user_input_mode == ValidMode.TRAIN.value:
             ppo_model_manager.train_model(env)
