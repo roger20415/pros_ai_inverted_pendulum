@@ -30,7 +30,7 @@ class InvertedPendulumEnv(gym.Env):
             low=-np.inf, high=np.inf, shape=(self._observation_shape,), dtype=np.float32
         )
         self.action_space = spaces.MultiDiscrete(Config.ACTION_NVEC)
-        return None
+        
 
     def step(self, action):
         self.action_manager.process_and_publish_actions(action, [self._state_dict.get("calf_angle", 0)])
@@ -59,7 +59,7 @@ class InvertedPendulumEnv(gym.Env):
         self._state_dict = self.data_manager.get_obervation()
         self._state_array = Utils.flatten_dict_to_array(self._state_dict.copy())
         
-        return None
+        
     
     def _should_terminate(self, state: dict[str, float]) -> bool:
         terminated: bool = False

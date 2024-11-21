@@ -7,7 +7,7 @@ class DataTransformer():
     def __init__(self, unity_data_store: UnityDataStore) -> None:
         
         self.unity_data_store = unity_data_store
-        return None
+        
     
     def transform_untiy_data_to_state(self) -> dict[str, float]:
         

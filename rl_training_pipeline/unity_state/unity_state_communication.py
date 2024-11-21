@@ -21,14 +21,14 @@ class UnityStateManagerNode(Node):
             10
         )
 
-        return None
+        
     
     def publish_reset_unity_scene(self, should_reset_scene: bool) -> None:
 
         msg = Bool()
         msg.data = should_reset_scene
         self._reset_unity_scene_publisher.publish(msg)
-        return None
+        
         
     def get_is_training_paused(self) -> bool:
 
@@ -37,8 +37,8 @@ class UnityStateManagerNode(Node):
     def set_is_training_paused(self, is_training_paused: bool) -> None:
 
         self._is_training_paused = is_training_paused
-        return None
+        
     
     def _subscribe_is_training_paused(self, msg: Bool) -> None:
         self._is_training_paused = msg.data
-        return None
+        

@@ -21,7 +21,7 @@ class UnityDataStore:
 
         self._recieved_unity_data[key] = msg.data
         self._turn_data_flag_to_ready(key)
-        return None
+        
 
     
     def wait_all_data_ready(self) -> None:
@@ -31,11 +31,11 @@ class UnityDataStore:
             if (i % 10000000 == 0) and (i != 0):
                 print("\nwaiting for data ...")
             i += 1
-        return None
+        
         
     def turn_all_data_flag_to_unready(self) -> None:
         self._if_data_ready_flags = dict.fromkeys(self._if_data_ready_flags.keys(), False)
-        return None
+        
     
     def _check_if_all_data_ready(self) -> bool:
         if_all_data_ready: bool = False
@@ -47,4 +47,4 @@ class UnityDataStore:
     def _turn_data_flag_to_ready(self, key: str) -> None:
         
         self._if_data_ready_flags[key] = True
-        return None
+        

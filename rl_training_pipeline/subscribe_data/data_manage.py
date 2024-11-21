@@ -10,7 +10,7 @@ class DataManager:
         self.data_transformer = DataTransformer(self.unity_data_store)
         self.data_subscriber = DataSubscriberNode(self.unity_data_store)
         
-        return None
+        
         
     def get_obervation(self) -> dict[str, float]:
          

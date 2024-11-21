@@ -13,7 +13,7 @@ class SaveModelCallback(BaseCallback):
         self._save_freq = save_freq
         self._last_save_step = 0
         
-        return None
+        
     
     def _on_step(self) -> bool:
 

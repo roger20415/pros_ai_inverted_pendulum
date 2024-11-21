@@ -37,8 +37,8 @@ class DataSubscriberNode(Node):
             lambda msg: self._subscribe_callback("calf_center_of_mass", msg),
             1
         )
-        return None
+        
 
     def _subscribe_callback(self, key: str, msg: Float32MultiArray) -> None:
         self._unity_data_store.store_received_data(key, msg)
-        return None
+        

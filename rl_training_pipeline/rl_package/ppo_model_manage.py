@@ -29,7 +29,7 @@ class PPOModelManager:
                     callback=callbacks,
                     log_interval=Config.LOG_INTERVAL)
         
-        return None
+        
     
     def _load_or_create_model(self, env: gym.Env) -> PPO:
         

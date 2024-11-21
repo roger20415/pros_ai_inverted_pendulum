@@ -21,7 +21,7 @@ class FpsPlotCallback(BaseCallback):
     
     def on_training_end(self) -> None:
         self.save_fps_plot()
-        return None
+        
     
     def _on_step(self) -> bool:
         if self.n_calls % Config.FPS_LOG_INTERVAL == 0:

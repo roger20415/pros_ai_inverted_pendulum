@@ -46,7 +46,7 @@ def main() -> None:
         ros_node_manager.shotdown_multi_threaded_executor()
         
     rclpy.shutdown()
-    return None
+    
 
 if __name__ == "__main__":
     main()
