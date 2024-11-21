@@ -20,7 +20,7 @@ class Config:
     SAVE_MODEL_PATH: str = "./rl_package/Model/inverted_pendulum_PPO_2024-11-20.pt"
     
     SAVE_MODEL_FREQUENCY: int = 1024
-    TRAINING_STEPS: int = 1024 * 20
+    TRAINING_STEPS: int = 1024 #* 20
     LOG_INTERVAL: int = 1
     
     LEARNING_RATE: float = 0.001

@@ -1,7 +1,7 @@
 from stable_baselines3.common.callbacks import BaseCallback
 
-from rl_training_pipeline.rl_package.callbacks.fps_plot_callback import FpsPlotCallback
-from rl_training_pipeline.rl_package.callbacks.save_model_callback import SaveModelCallback
+from rl_package.callbacks.fps_plot_callback import FpsPlotCallback
+from rl_package.callbacks.save_model_callback import SaveModelCallback
 from config import Config
 
 class CallbackManager:
