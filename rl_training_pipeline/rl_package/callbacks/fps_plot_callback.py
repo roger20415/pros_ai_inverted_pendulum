@@ -18,7 +18,11 @@ class FpsPlotCallback(BaseCallback):
         plt.ylabel("FPS")
         plt.savefig(Config.FPS_PLOT_PATH) 
         print("FPS plot saved as " + Config.FPS_PLOT_PATH)
-
+    
+    def on_training_end(self) -> None:
+        self.save_fps_plot()
+        return None
+    
     def _on_step(self) -> bool:
         if self.n_calls % Config.FPS_LOG_INTERVAL == 0:
             interval_end_time: float = time.time()

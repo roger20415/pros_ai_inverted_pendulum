@@ -47,7 +47,7 @@ class InvertedPendulumEnv(gym.Env):
         i: int = 0 # counter
         while(self.unity_state_manager.get_is_training_paused()):
             i += 1
-            if i % 10000 == 0:
+            if i % 1000000 == 0:
                 print("Unity scene reset failed. Try again...")
                 self.unity_state_manager.get_is_training_paused()
             
