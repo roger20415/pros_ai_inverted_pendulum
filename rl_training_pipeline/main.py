@@ -3,6 +3,7 @@ from rclpy.node import Node
 import gymnasium as gym
 
 from config import ValidMode
+from config import Config
 from user_cli import UserCLI
 from ros_node_manage import RosNodeManager
 from rl_package.ppo_model_manage import PPOModelManager
@@ -44,6 +45,8 @@ def main() -> None:
         
     finally:
         ros_node_manager.shotdown_multi_threaded_executor()
+
+    data_manager.unity_data_store.waiting_data_monitor.save_waiting_count_plot(Config.WAITING_DATA_PLOT_PATH)
         
     rclpy.shutdown()
     

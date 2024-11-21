@@ -1,6 +1,7 @@
 import copy
 
 from std_msgs.msg import Float32MultiArray
+from subscribe_data.waiting_data_monitor import WaitingDataMonitor
 
 class UnityDataStore:
     
@@ -13,6 +14,8 @@ class UnityDataStore:
             "baselink_center_of_mass": False,
             "calf_center_of_mass": False
         }
+
+        self.waiting_data_monitor = WaitingDataMonitor()
     
     def get_unity_data(self) -> dict:
         return copy.deepcopy(self._recieved_unity_data)
@@ -31,6 +34,7 @@ class UnityDataStore:
             if (i % 10000000 == 0) and (i != 0):
                 print("\nwaiting for data ...")
             i += 1
+        self.waiting_data_monitor.append_waiting_count(i)
         
         
     def turn_all_data_flag_to_unready(self) -> None:

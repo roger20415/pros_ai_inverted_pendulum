@@ -1,7 +1,8 @@
 import time
-import matplotlib.pyplot as plt
+
 from stable_baselines3.common.callbacks import BaseCallback
 from config import Config
+from utils import Utils
 
 class FpsPlotCallback(BaseCallback):
     def __init__(self, verbose=0) -> None:
@@ -12,13 +13,15 @@ class FpsPlotCallback(BaseCallback):
         self._interval_start_time: float = time.time()
 
     def save_fps_plot(self) -> None:
-        plt.plot(self._steps, self._fps_list)
-        plt.title("FPS Over Time")
-        plt.xlabel("Steps")
-        plt.ylabel("FPS")
-        plt.savefig(Config.FPS_PLOT_PATH) 
-        print("FPS plot saved as " + Config.FPS_PLOT_PATH)
-    
+        Utils.save_plot(
+            xdata=self._steps,
+            ydata=self._fps_list,
+            title="FPS Over Time",
+            xlabel="Steps",
+            ylabel="FPS",
+            save_path=Config.FPS_PLOT_PATH
+        )
+
     def on_training_end(self) -> None:
         self.save_fps_plot()
         
