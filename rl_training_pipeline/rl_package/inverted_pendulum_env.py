@@ -43,9 +43,14 @@ class InvertedPendulumEnv(gym.Env):
     def reset(self, seed=None, options=None):
         self.unity_state_manager.set_is_training_paused(True)
         self.unity_state_manager.publish_reset_unity_scene(True)
-        while(self.unity_state_manager.get_is_training_paused()):
-            pass
 
+        i: int = 0 # counter
+        while(self.unity_state_manager.get_is_training_paused()):
+            i += 1
+            if i % 10000 == 0:
+                print("Unity scene reset failed. Try again...")
+                self.unity_state_manager.get_is_training_paused()
+            
         self._update_state()
         
         return self._state_array, {}

@@ -19,14 +19,17 @@ class Config:
     LOAD_MODEL_PATH: str = "./rl_package/Model/inverted_pendulum_PPO_2024-11-20.pt"
     SAVE_MODEL_PATH: str = "./rl_package/Model/inverted_pendulum_PPO_2024-11-20.pt"
     
-    SAVE_MODEL_FREQUENCY: int = 1024 * 128
-    TRAINING_STEPS: int = 1024 * 128 * 128
+    SAVE_MODEL_FREQUENCY: int = 1024
+    TRAINING_STEPS: int = 1024 * 5
     LOG_INTERVAL: int = 1
     
     LEARNING_RATE: float = 0.001
     N_STEPS: int = 1024
     BATCH_SIZE: int = 64
     N_EPOCHS: int = 10
+
+    FPS_LOG_INTERVAL: int = 32 # training steps
+    FPS_PLOT_PATH: str = "./rl_package/fps_plot.png"
 
     # stable baselines3 env
     ACTION_NVEC: list[int] = [9]
