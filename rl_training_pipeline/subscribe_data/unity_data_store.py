@@ -24,7 +24,7 @@ class UnityDataStore:
     def store_received_data(self, key: str, msg: Float32MultiArray) -> None:
 
         self._recieved_unity_data[key] = msg.data
-        self._turn_data_flag_to_ready(key)
+        self._if_data_ready_flags[key] = True
 
     def wait_all_data_ready(self, timeout: float = 0.1) -> None:
         start_time: float = time.time()
@@ -46,8 +46,4 @@ class UnityDataStore:
             if_all_data_ready = True
         
         return if_all_data_ready
-    
-    def _turn_data_flag_to_ready(self, key: str) -> None:
-        
-        self._if_data_ready_flags[key] = True
         
