@@ -46,7 +46,7 @@ def main() -> None:
     finally:
         ros_node_manager.shotdown_multi_threaded_executor()
 
-    data_manager.unity_data_store.waiting_data_monitor.save_waiting_count_plot(Config.WAITING_DATA_PLOT_PATH)
+    data_manager.unity_data_store.waiting_data_monitor.save_waiting_time_plot(Config.WAITING_DATA_TIME_PLOT_PATH)
         
     rclpy.shutdown()
     
