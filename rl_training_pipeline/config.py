@@ -1,5 +1,6 @@
 from enum import Enum
 from multiprocessing.pool import TERMINATE
+from re import M
 
 class ValidMode(Enum):
     TRAIN: str = '1'
@@ -28,9 +29,6 @@ class Config:
     BATCH_SIZE: int = 64
     N_EPOCHS: int = 10
 
-    FPS_LOG_INTERVAL: int = 32 # training steps
-    FPS_PLOT_PATH: str = "./rl_package/fps_plot.png"
-
     # stable baselines3 env
     ACTION_NVEC: list[int] = [9]
     TERMINATE_THRESHOLD: float = 25.0 # degree
@@ -48,3 +46,10 @@ class Config:
 
 
     WAITING_DATA_TIME_PLOT_PATH: str = "./waiting_data_time_plot.png"
+
+    # Fps monitor
+    FPS_LOG_INTERVAL: int = 32 # training steps
+    FPS_PLOT_PATH: str = "./rl_package/fps_plot.png"
+
+    LOW_FPS_THRESHOLD: float = 25.0
+    MAX_LOW_FPS_STREAK: int = 4

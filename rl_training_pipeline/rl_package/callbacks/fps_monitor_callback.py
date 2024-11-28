@@ -1,12 +1,15 @@
 import time
 
 from stable_baselines3.common.callbacks import BaseCallback
+
+from rl_package.callbacks.low_fps_stopper import LowFpsStopper
 from config import Config
 from utils import Utils
 
-class FpsPlotCallback(BaseCallback):
+class FpsMonitorCallback(BaseCallback):
     def __init__(self, verbose=0) -> None:
-        super(FpsPlotCallback, self).__init__(verbose)
+        super(FpsMonitorCallback, self).__init__(verbose)
+        self.low_fps_stopper: LowFpsStopper = LowFpsStopper()
         self._fps_list: list[float] = []
         self._steps: list[int] = []
         self._last_n_calls: int = 0
@@ -25,7 +28,6 @@ class FpsPlotCallback(BaseCallback):
     def on_training_end(self) -> None:
         self.save_fps_plot()
         
-    
     def _on_step(self) -> bool:
         if self.n_calls % Config.FPS_LOG_INTERVAL == 0:
             interval_end_time: float = time.time()
@@ -37,4 +39,5 @@ class FpsPlotCallback(BaseCallback):
             self._last_n_calls = self.n_calls 
             self._interval_start_time = time.time()
 
+            self.low_fps_stopper.calculate_low_fps_streak(fps)
         return True

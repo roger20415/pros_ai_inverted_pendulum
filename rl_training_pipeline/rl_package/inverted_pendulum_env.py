@@ -53,7 +53,7 @@ class InvertedPendulumEnv(gym.Env):
             
         self._update_state()
         self.reward_calculator.reset_previous_foundation_angle()
-        
+        print("reset")
         return self._state_array, {}
     
     def _update_state(self) -> None:
