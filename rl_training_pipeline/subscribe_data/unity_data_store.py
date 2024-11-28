@@ -31,7 +31,6 @@ class UnityDataStore:
             if time.time() - last_log_time > timeout:
                 print("Waiting for Unity data timed out.")
                 last_log_time = time.time()
-            time.sleep(0.005)
         waiting_data_monitor.append_waiting_time(int((time.time() - start_time) * 1e6)) # convert s to µs
         
     def turn_all_data_flag_to_unready(self) -> None:

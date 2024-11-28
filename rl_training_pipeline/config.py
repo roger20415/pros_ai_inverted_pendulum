@@ -20,7 +20,7 @@ class Config:
     SAVE_MODEL_PATH: str = "./rl_package/Model/inverted_pendulum_PPO_2024-11-20.pt"
     
     SAVE_MODEL_FREQUENCY: int = 1024
-    TRAINING_STEPS: int = 1024
+    TRAINING_STEPS: int = 1024 * 10
     LOG_INTERVAL: int = 1
     
     LEARNING_RATE: float = 0.001
@@ -40,8 +40,9 @@ class Config:
     MAX_JOINT_ANGLE: float = 120.0 # degree
 
     # reward
+    ANGLE_REWARD_WEIGHT: float = -5.0
     STABILITY_BONUS_THRESHOLD = 0.5 # degree
-    STABILITY_BONUS = 1.0 # reward points
+    STABILITY_BONUS = 4.0 # reward points
     TILT_PENALTY_THRESHOLD = 7.0 # degree
     TILT_PENALTY = -10.0 # reward pointsS
 

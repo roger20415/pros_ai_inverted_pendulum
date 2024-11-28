@@ -52,6 +52,7 @@ class InvertedPendulumEnv(gym.Env):
                 self.unity_state_manager.get_is_training_paused()
             
         self._update_state()
+        self.reward_calculator.reset_previous_foundation_angle()
         
         return self._state_array, {}
     
@@ -59,8 +60,6 @@ class InvertedPendulumEnv(gym.Env):
         self._state_dict = self.data_manager.get_obervation()
         self._state_array = Utils.flatten_dict_to_array(self._state_dict.copy())
         
-        
-    
     def _should_terminate(self, state: dict[str, float]) -> bool:
         terminated: bool = False
         foundation_angle: float = abs(state["foundation_angle"])
