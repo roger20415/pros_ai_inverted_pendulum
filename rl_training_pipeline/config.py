@@ -38,6 +38,7 @@ class Config:
     MAX_JOINT_ANGLE: float = 120.0 # degree
 
     # reward
+    SWING_ALIGNMENT_REWARD: float = 7.0
     CENTER_REWARD_WEIGHT: float = -5.0
     STABILITY_BONUS_THRESHOLD: float = 1.0 # degree
     STABILITY_BONUS: float = 4.0 # reward points

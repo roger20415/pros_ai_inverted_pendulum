@@ -16,7 +16,6 @@ class InvertedPendulumEnv(gym.Env):
 
     def __init__(self, data_manager: DataManager, action_manager: ActionManager, unity_state_manager: UnityStateManagerNode) -> None:
         super(InvertedPendulumEnv, self).__init__()
-
         self.data_manager = data_manager
         self.action_manager = action_manager
         self.unity_state_manager = unity_state_manager
@@ -37,7 +36,7 @@ class InvertedPendulumEnv(gym.Env):
     def step(self, action):
         self.action_manager.process_and_publish_actions(action, [self._state_dict.get("calf_angle", 0)])
         self._update_state()
-        reward: float = self.reward_calculator.calculate_reward(self._state_dict)
+        reward: float = self.reward_calculator.calculate_reward(self._state_dict, action)
         terminated: bool = self._should_terminate(self._state_dict)
 
         return self._state_array, reward, terminated, False, {}
