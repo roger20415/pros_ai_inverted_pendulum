@@ -27,6 +27,14 @@ class RewardCalculator:
         
         return angle_change * Config.ANGLE_REWARD_WEIGHT
     
+
+
+
+
+
+
+
+    
     def _calculate_stability_bonus(self, foundation_angle: float) -> float:
         stability_bonus: float = 0.0
         if foundation_angle < Config.STABILITY_BONUS_THRESHOLD:

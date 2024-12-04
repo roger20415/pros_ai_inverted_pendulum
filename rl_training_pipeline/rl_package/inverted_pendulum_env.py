@@ -1,3 +1,5 @@
+import time
+
 import numpy as np
 import gymnasium as gym
 from gymnasium import spaces
@@ -41,9 +43,12 @@ class InvertedPendulumEnv(gym.Env):
         return self._state_array, reward, terminated, False, {}
 
     def reset(self, seed=None, options=None):
+        print("reset")
+        time.sleep(1)
+        self.reward_calculator.reset_previous_foundation_angle()
+
         self.unity_state_manager.set_is_training_paused(True)
         self.unity_state_manager.publish_reset_unity_scene(True)
-
         i: int = 0 # counter
         while(self.unity_state_manager.get_is_training_paused()):
             i += 1
@@ -52,8 +57,7 @@ class InvertedPendulumEnv(gym.Env):
                 self.unity_state_manager.get_is_training_paused()
             
         self._update_state()
-        self.reward_calculator.reset_previous_foundation_angle()
-        print("reset")
+
         return self._state_array, {}
     
     def _update_state(self) -> None:

@@ -51,5 +51,6 @@ class Config:
     FPS_LOG_INTERVAL: int = 32 # training steps
     FPS_PLOT_PATH: str = "./rl_package/fps_plot.png"
 
-    LOW_FPS_THRESHOLD: float = 25.0
+    LOW_FPS_THRESHOLD: float = 35.0
     MAX_LOW_FPS_STREAK: int = 4
+    FPS_STOPPER_SLEEP_TIME: float = 10.0

@@ -40,4 +40,10 @@ class FpsMonitorCallback(BaseCallback):
             self._interval_start_time = time.time()
 
             self.low_fps_stopper.calculate_low_fps_streak(fps)
+            self._check_reset_training()
         return True
+
+    def _check_reset_training(self) -> None:
+        if self.low_fps_stopper.get_should_reset_training():
+            self.low_fps_stopper.set_should_reset_training(False)
+            self.training_env.reset()
