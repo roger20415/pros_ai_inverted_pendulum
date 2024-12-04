@@ -3,37 +3,31 @@ from config import Config
 class RewardCalculator:
 
     def __init__(self) -> None:
-        self._previous_foundation_angle: float = 0.0
+        self._previous_center_of_mass: float = 0.0
 
     def calculate_reward(self, state_dict: dict[str, float]) -> float:
-    
+        
+        print("foundation angle  " + str(state_dict["foundation_angle"]))
         foundation_angle: float = abs(state_dict["foundation_angle"])
+        center_of_mass: float = abs(state_dict["center_of_mass"])
 
-        angle_penalty: float = self._calculate_angle_reward(foundation_angle)
+        center_reward: float = self._calculate_center_of_mass_reward(center_of_mass)
         stability_bonus: float = self._calculate_stability_bonus(foundation_angle)
         tilt_penalty: float = self._calculate_tilt_penalty(foundation_angle)
-        reward: float = angle_penalty + stability_bonus + tilt_penalty
+        reward: float = center_reward + stability_bonus + tilt_penalty
 
-        self._previous_foundation_angle = foundation_angle
+        self._previous_center_of_mass = center_of_mass
         print(f"reward: {reward}")
 
         return reward
     
-    def reset_previous_foundation_angle(self) -> None:
-        self._previous_foundation_angle = 0.0
+    def reset_previous_center_of_mass(self) -> None:
+        self._previous_center_of_mass = 0.0
     
-    def _calculate_angle_reward(self, foundation_angle: float) -> float:
-        angle_change = foundation_angle - self._previous_foundation_angle
+    def _calculate_center_of_mass_reward(self, center_of_mass: float) -> float:
+        center_change = center_of_mass - self._previous_center_of_mass
         
-        return angle_change * Config.ANGLE_REWARD_WEIGHT
-    
-
-
-
-
-
-
-
+        return center_change * Config.CENTER_REWARD_WEIGHT
     
     def _calculate_stability_bonus(self, foundation_angle: float) -> float:
         stability_bonus: float = 0.0

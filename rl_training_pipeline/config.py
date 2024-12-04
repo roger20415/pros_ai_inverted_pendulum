@@ -31,18 +31,18 @@ class Config:
 
     # stable baselines3 env
     ACTION_NVEC: list[int] = [11]
-    TERMINATE_THRESHOLD: float = 5 # degree
+    TERMINATE_THRESHOLD: float = 6.0 # degree
 
     # action
     JOINT_DELTA_UNIT: float = 1.8 # degree
     MAX_JOINT_ANGLE: float = 120.0 # degree
 
     # reward
-    ANGLE_REWARD_WEIGHT: float = -5.0
-    STABILITY_BONUS_THRESHOLD = 0.5 # degree
-    STABILITY_BONUS = 4.0 # reward points
-    TILT_PENALTY_THRESHOLD = 7.0 # degree
-    TILT_PENALTY = -10.0 # reward pointsS
+    CENTER_REWARD_WEIGHT: float = -5.0
+    STABILITY_BONUS_THRESHOLD: float = 1.0 # degree
+    STABILITY_BONUS: float = 4.0 # reward points
+    TILT_PENALTY_THRESHOLD: float = 3.0 # degree
+    TILT_PENALTY: float = -10.0 # reward pointsS
 
 
     WAITING_DATA_TIME_PLOT_PATH: str = "./waiting_data_time_plot.png"
