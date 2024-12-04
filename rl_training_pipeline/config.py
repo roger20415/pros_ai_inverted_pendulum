@@ -21,7 +21,7 @@ class Config:
     SAVE_MODEL_PATH: str = "./rl_package/Model/inverted_pendulum_PPO_2024-11-20.pt"
     
     SAVE_MODEL_FREQUENCY: int = 1024
-    TRAINING_STEPS: int = 1024 * 10
+    TRAINING_STEPS: int = 1024 * 2
     LOG_INTERVAL: int = 1
     
     LEARNING_RATE: float = 0.001
@@ -31,7 +31,7 @@ class Config:
 
     # stable baselines3 env
     ACTION_NVEC: list[int] = [9]
-    TERMINATE_THRESHOLD: float = 25.0 # degree
+    TERMINATE_THRESHOLD: float = 4.5 # degree
 
     # action
     JOINT_DELTA_UNIT: float = 1.0 # degree
@@ -51,6 +51,6 @@ class Config:
     FPS_LOG_INTERVAL: int = 32 # training steps
     FPS_PLOT_PATH: str = "./rl_package/fps_plot.png"
 
-    LOW_FPS_THRESHOLD: float = 35.0
+    LOW_FPS_THRESHOLD: float = 0.0
     MAX_LOW_FPS_STREAK: int = 4
     FPS_STOPPER_SLEEP_TIME: float = 10.0

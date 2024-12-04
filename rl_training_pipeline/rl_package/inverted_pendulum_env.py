@@ -44,7 +44,7 @@ class InvertedPendulumEnv(gym.Env):
 
     def reset(self, seed=None, options=None):
         print("reset")
-        time.sleep(1)
+        time.sleep(3)
         self.reward_calculator.reset_previous_foundation_angle()
 
         self.unity_state_manager.set_is_training_paused(True)
