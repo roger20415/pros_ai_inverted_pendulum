@@ -30,11 +30,11 @@ class Config:
     N_EPOCHS: int = 10
 
     # stable baselines3 env
-    ACTION_NVEC: list[int] = [9]
-    TERMINATE_THRESHOLD: float = 4.5 # degree
+    ACTION_NVEC: list[int] = [11]
+    TERMINATE_THRESHOLD: float = 5 # degree
 
     # action
-    JOINT_DELTA_UNIT: float = 1.0 # degree
+    JOINT_DELTA_UNIT: float = 1.8 # degree
     MAX_JOINT_ANGLE: float = 120.0 # degree
 
     # reward
