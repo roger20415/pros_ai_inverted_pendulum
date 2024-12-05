@@ -58,3 +58,6 @@ class Config:
     LOW_FPS_THRESHOLD: float = 0.0
     MAX_LOW_FPS_STREAK: int = 4
     FPS_STOPPER_SLEEP_TIME: float = 10.0
+
+    # com monitor 
+    COM_PLOT_PATH: str = "./subscribe_data/com_plot.png"
