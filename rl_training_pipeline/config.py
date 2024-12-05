@@ -31,6 +31,9 @@ class Config:
 
     # stable baselines3 env
     ACTION_NVEC: list[int] = [11]
+    NO_MOVE_ACTION: int = 0
+    POSITIVE_ACTIONS: list[int] = [1, 2, 3, 4, 5]
+    NEGATIVE_ACTIONS: list[int] = [6, 7, 8, 9, 10]
     TERMINATE_THRESHOLD: float = 6.0 # degree
 
     # action
@@ -38,11 +41,11 @@ class Config:
     MAX_JOINT_ANGLE: float = 120.0 # degree
 
     # reward
-    SWING_ALIGNMENT_REWARD: float = 7.0
-    CENTER_REWARD_WEIGHT: float = -5.0
-    STABILITY_BONUS_THRESHOLD: float = 1.0 # degree
+    SWING_ALIGNMENT_REWARD: float = 5.0 # reward points
+    CENTER_REWARD_WEIGHT: float = -5000.0
+    STABILITY_BONUS_THRESHOLD: float = 1.5 # degree
     STABILITY_BONUS: float = 4.0 # reward points
-    TILT_PENALTY_THRESHOLD: float = 3.0 # degree
+    TILT_PENALTY_THRESHOLD: float = 4.5 # degree
     TILT_PENALTY: float = -10.0 # reward pointsS
 
 

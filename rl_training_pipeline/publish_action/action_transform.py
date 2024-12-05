@@ -15,27 +15,27 @@ class ActionTransformer:
         
         joint_angle_deltas: list[float] = []
         for action in actions:
-            if action == 0:
+            if action == Config.NO_MOVE_ACTION:
                 joint_angle_deltas.append(0)
-            elif action == 1:
+            elif action == Config.POSITIVE_ACTIONS[0]:
                 joint_angle_deltas.append(Config.JOINT_DELTA_UNIT)
-            elif action == 2:
+            elif action == Config.POSITIVE_ACTIONS[1]:
                 joint_angle_deltas.append(2 * Config.JOINT_DELTA_UNIT)
-            elif action == 3:
+            elif action == Config.POSITIVE_ACTIONS[2]:
                 joint_angle_deltas.append(3 * Config.JOINT_DELTA_UNIT)
-            elif action == 4:
+            elif action == Config.POSITIVE_ACTIONS[3]:
                 joint_angle_deltas.append(4 * Config.JOINT_DELTA_UNIT)
-            elif action == 5:
+            elif action == Config.POSITIVE_ACTIONS[4]:
                 joint_angle_deltas.append(5 * Config.JOINT_DELTA_UNIT)
-            elif action == 6:
+            elif action == Config.NEGATIVE_ACTIONS[0]:
                 joint_angle_deltas.append(-Config.JOINT_DELTA_UNIT)
-            elif action == 7:
+            elif action == Config.NEGATIVE_ACTIONS[1]:
                 joint_angle_deltas.append(-2 * Config.JOINT_DELTA_UNIT)
-            elif action == 8:
+            elif action == Config.NEGATIVE_ACTIONS[2]:
                 joint_angle_deltas.append(-3 * Config.JOINT_DELTA_UNIT)
-            elif action == 9:
+            elif action == Config.NEGATIVE_ACTIONS[3]:
                 joint_angle_deltas.append(-4 * Config.JOINT_DELTA_UNIT)
-            elif action == 10:
+            elif action == Config.NEGATIVE_ACTIONS[4]:
                 joint_angle_deltas.append(-5 * Config.JOINT_DELTA_UNIT)
             else:
                 raise ValueError("Invalid action value: {}".format(action))

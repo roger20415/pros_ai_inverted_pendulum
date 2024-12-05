@@ -17,7 +17,12 @@ class RewardCalculator:
         stability_bonus: float = self._calculate_stability_bonus(foundation_angle)
         tilt_penalty: float = self._calculate_tilt_penalty(foundation_angle)
         reward: float = swing_alignment_reward + center_reward + stability_bonus + tilt_penalty
-
+        print("\n")
+        print("swing alignment reward: " + str(swing_alignment_reward))
+        print("center reward: " + str(center_reward))
+        print("stability bounus: " + str(stability_bonus))
+        print("tilt penalty: " + str(tilt_penalty))
+        print("\n")
         self._previous_center_of_mass = center_of_mass
         print(f"reward: {reward}")
 
@@ -31,9 +36,9 @@ class RewardCalculator:
         swing_alignment_reward: float = -Config.SWING_ALIGNMENT_REWARD
         action_value: int = action[0]
 
-        if ((self._previous_center_of_mass > 0.0 and action_value in [6, 7, 8, 9, 10]) or
-            (self._previous_center_of_mass <= 0.0 and action_value in [1, 2, 3, 4, 5]) or 
-            (self._previous_center_of_mass == 0.0 and action_value == 0)):
+        if ((self._previous_center_of_mass > 0.0 and action_value in Config.NEGATIVE_ACTIONS) or
+            (self._previous_center_of_mass < 0.0 and action_value in Config.POSITIVE_ACTIONS) or 
+            (self._previous_center_of_mass == 0.0 and action_value == Config.NO_MOVE_ACTION)):
             swing_alignment_reward = Config.SWING_ALIGNMENT_REWARD
 
         return swing_alignment_reward
