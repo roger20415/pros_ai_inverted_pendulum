@@ -21,7 +21,7 @@ class Config:
     SAVE_MODEL_PATH: str = "./rl_package/Model/inverted_pendulum_PPO_2024-11-20.pt"
     
     SAVE_MODEL_FREQUENCY: int = 1024
-    TRAINING_STEPS: int = 1024 * 2
+    TRAINING_STEPS: int = 1024 * 10
     LOG_INTERVAL: int = 1
     
     LEARNING_RATE: float = 0.001
@@ -46,7 +46,10 @@ class Config:
     STABILITY_BONUS_THRESHOLD: float = 1.5 # degree
     STABILITY_BONUS: float = 4.0 # reward points
     TILT_PENALTY_THRESHOLD: float = 4.5 # degree
-    TILT_PENALTY: float = -10.0 # reward pointsS
+    TILT_PENALTY: float = -10.0 # reward points
+
+    STEP_DURATION_GROWTH_RATE: float = 0.42
+    STEP_COUNT_THRESHOLD: int = 23
 
 
     WAITING_DATA_TIME_PLOT_PATH: str = "./waiting_data_time_plot.png"
@@ -61,3 +64,6 @@ class Config:
 
     # com monitor 
     COM_PLOT_PATH: str = "./subscribe_data/com_plot.png"
+
+    # duration steps monitor
+    DURATION_STEPS_PLOT_PATH: str = "./rl_package/duration_steps_plot.png"

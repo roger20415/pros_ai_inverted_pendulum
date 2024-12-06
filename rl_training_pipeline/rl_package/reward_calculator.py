@@ -1,29 +1,32 @@
-from config import Config
+import math
 
 import numpy as np
+
+from config import Config
 
 class RewardCalculator:
 
     def __init__(self) -> None:
         self._previous_center_of_mass: float = 0.0
 
-    def calculate_reward(self, state_dict: dict[str, float], action: np.ndarray) -> float:
+    def calculate_reward(self, state_dict: dict[str, float], action: np.ndarray, step_counter: int) -> float:
 
         foundation_angle: float = state_dict["foundation_angle"]
         center_of_mass: float = state_dict["center_of_mass"]
 
-        swing_alignment_reward: float = self._calculate_swing_alignment_reward(action)
+        print("state dict: ", state_dict)
+        print("action: ", action)
+        print("\n")
+
+        #swing_alignment_reward: float = self._calculate_swing_alignment_reward(action)
         center_reward: float = self._calculate_center_of_mass_reward(center_of_mass)
         stability_bonus: float = self._calculate_stability_bonus(foundation_angle)
         tilt_penalty: float = self._calculate_tilt_penalty(foundation_angle)
-        reward: float = swing_alignment_reward + center_reward + stability_bonus + tilt_penalty
-        print("\n")
-        print("swing alignment reward: " + str(swing_alignment_reward))
-        print("center reward: " + str(center_reward))
-        print("stability bounus: " + str(stability_bonus))
-        print("tilt penalty: " + str(tilt_penalty))
-        print("\n")
+        step_duration_reward: float = self._calculate_step_duration_reward(step_counter)
+        reward: float = center_reward + stability_bonus + tilt_penalty + step_duration_reward
         self._previous_center_of_mass = center_of_mass
+
+        print("step_duration_reward: ", step_duration_reward)
         print(f"reward: {reward}")
 
         return reward
@@ -61,3 +64,13 @@ class RewardCalculator:
             tilt_penalty = Config.TILT_PENALTY
 
         return tilt_penalty
+
+    def _calculate_step_duration_reward(self, step_count: int) -> float:
+            
+        reward = math.exp(Config.STEP_DURATION_GROWTH_RATE * (step_count - Config.STEP_COUNT_THRESHOLD))
+
+        # avoid overflow
+        if Config.STEP_DURATION_GROWTH_RATE * (step_count - Config.STEP_COUNT_THRESHOLD) > 700:
+            reward = math.exp(700)
+        
+        return reward

@@ -4,6 +4,7 @@ import numpy as np
 import gymnasium as gym
 from gymnasium import spaces
 
+from rl_package.duration_step_monitor import DurationStepMonitor
 from publish_action.action_manage import ActionManager
 from subscribe_data.data_manage import DataManager
 from unity_state.unity_state_communication import UnityStateManagerNode
@@ -20,9 +21,12 @@ class InvertedPendulumEnv(gym.Env):
         self.action_manager = action_manager
         self.unity_state_manager = unity_state_manager
         self.reward_calculator = RewardCalculator()
+        self.duration_steps_monitor = DurationStepMonitor()
         
         self._state_dict: dict[str, float] = {}
         self._state_array: np.ndarray[np.float32] = np.array([])
+
+        self._step_counter: int = 0
 
         self._update_state()
         self._observation_shape: int = len(self._state_array)
@@ -36,12 +40,18 @@ class InvertedPendulumEnv(gym.Env):
     def step(self, action):
         self.action_manager.process_and_publish_actions(action, [self._state_dict.get("calf_angle", 0)])
         self._update_state()
-        reward: float = self.reward_calculator.calculate_reward(self._state_dict, action)
+        reward: float = self.reward_calculator.calculate_reward(self._state_dict, action, self._step_counter)
         terminated: bool = self._should_terminate(self._state_dict)
+        self.duration_steps_monitor.add_duration_steps()
+        self._step_counter += 1
 
         return self._state_array, reward, terminated, False, {}
 
     def reset(self, seed=None, options=None):
+        self.duration_steps_monitor.append_duration_steps_to_list()
+        self.duration_steps_monitor.save_duration_steps_plot(Config.DURATION_STEPS_PLOT_PATH)
+        self._step_counter = 0
+        
         print("reset")
         time.sleep(3)
         self.reward_calculator.reset_previous_center_of_mass()
