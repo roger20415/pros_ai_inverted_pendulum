@@ -14,8 +14,10 @@ class RewardCalculator:
         foundation_angle: float = state_dict["foundation_angle"]
         center_of_mass: float = state_dict["center_of_mass"]
 
-        print("state dict: ", state_dict)
         print("action: ", action)
+        print("calf angle", state_dict["calf_angle"])
+        print("foundation angle", state_dict["foundation_angle"])
+        print("center of mass", state_dict["center_of_mass"])
         print("\n")
 
         #swing_alignment_reward: float = self._calculate_swing_alignment_reward(action)
@@ -26,8 +28,15 @@ class RewardCalculator:
         reward: float = center_reward + stability_bonus + tilt_penalty + step_duration_reward
         self._previous_center_of_mass = center_of_mass
 
+        print("center reward: ", center_reward)
+        print("stability_bonus: ", stability_bonus)
+        print("tilt_penalty: ", tilt_penalty)
         print("step_duration_reward: ", step_duration_reward)
         print(f"reward: {reward}")
+        print("\n\n")
+
+        if step_counter > 55:
+            exit()
 
         return reward
     

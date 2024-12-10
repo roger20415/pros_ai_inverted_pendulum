@@ -17,13 +17,18 @@ class Utils:
         return flat_array
     
     @staticmethod
-    def save_plot(xdata: list[float | int], ydata: list[float | int], 
-                title: str, xlabel: str, ylabel: str, save_path: str) -> None:
-        
-        plt.clf()
-        plt.plot(xdata, ydata)
+    def save_plot(xdata, ydata, title, xlabel, ylabel, save_path, plot_type="line"):
+        plt.figure(figsize=(10, 6))
+
+        if plot_type == "line":
+            plt.plot(xdata, ydata, label='Data', linestyle='-', marker='o')
+        elif plot_type == "scatter":
+            plt.scatter(xdata, ydata, label='Data', color='blue')
+
         plt.title(title)
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
+        plt.legend()
+        plt.grid(True)
         plt.savefig(save_path)
-        print(f"Plot saved as {save_path}")
+        plt.close()

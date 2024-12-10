@@ -25,4 +25,7 @@ class DataManager:
     
     def get_data_subscriber_node(self) -> Node:
         return self.data_subscriber
+    
+    def reset(self) -> None:
+        self.data_transformer.reset()
             

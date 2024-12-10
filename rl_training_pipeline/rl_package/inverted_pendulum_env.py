@@ -36,9 +36,9 @@ class InvertedPendulumEnv(gym.Env):
         )
         self.action_space = spaces.MultiDiscrete(Config.ACTION_NVEC)
         
-
     def step(self, action):
         self.action_manager.process_and_publish_actions(action, [self._state_dict.get("calf_angle", 0)])
+        time.sleep(Config.WATIING_TIME_PER_STEP)
         self._update_state()
         reward: float = self.reward_calculator.calculate_reward(self._state_dict, action, self._step_counter)
         terminated: bool = self._should_terminate(self._state_dict)
@@ -50,10 +50,12 @@ class InvertedPendulumEnv(gym.Env):
     def reset(self, seed=None, options=None):
         self.duration_steps_monitor.append_duration_steps_to_list()
         self.duration_steps_monitor.save_duration_steps_plot(Config.DURATION_STEPS_PLOT_PATH)
+        self.duration_steps_monitor.save_avg_duration_steps_plot(Config.AVERATE_DURATION_STEPS_PLOT_PATH)
         self._step_counter = 0
-        
-        print("reset")
-        time.sleep(3)
+        self.data_manager.reset()
+
+        print("\n-----------reset-------------\n")
+        time.sleep(5)
         self.reward_calculator.reset_previous_center_of_mass()
 
         self.unity_state_manager.set_is_training_paused(True)

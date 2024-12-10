@@ -29,8 +29,6 @@ class PPOModelManager:
                     callback=callbacks,
                     log_interval=Config.LOG_INTERVAL)
         
-        
-    
     def _load_or_create_model(self, env: gym.Env) -> PPO:
         
         env = Monitor(env)
@@ -42,7 +40,7 @@ class PPOModelManager:
             model = PPO("MlpPolicy", 
                         env, verbose=1, learning_rate=Config.LEARNING_RATE,
                         n_steps=Config.N_STEPS, batch_size=Config.BATCH_SIZE,
-                        n_epochs=Config.N_EPOCHS, device="cpu")
+                        n_epochs=Config.N_EPOCHS, gamma=Config.GAMMA, device="cpu")
         print(f'Model is on device: {model.policy.device}')
 
         model.set_env(env)
