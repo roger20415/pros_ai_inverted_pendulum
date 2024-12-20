@@ -40,7 +40,7 @@ class ActionTransformer:
             else:
                 raise ValueError("Invalid action value: {}".format(action))
             
-        return joint_angle_deltas
+        return joint_angle_deltas # degree
     
     def _calculate_target_joint_angles(self, joint_angle_deltas: list[float], current_joint_angles: list[float]) -> list[float]:
         return np.add(joint_angle_deltas, current_joint_angles).tolist()

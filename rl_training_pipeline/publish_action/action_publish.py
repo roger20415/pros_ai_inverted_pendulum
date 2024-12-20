@@ -20,5 +20,4 @@ class ActionPublisherNode(Node):
         msg.positions = target_joint_angles
         msg.velocities = [0.0] * len(target_joint_angles)
         self._target_joint_angles_publisher.publish(msg)
- 
         

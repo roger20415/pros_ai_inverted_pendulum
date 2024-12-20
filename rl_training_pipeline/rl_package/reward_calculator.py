@@ -15,10 +15,32 @@ class RewardCalculator:
         center_of_mass: float = state_dict["center_of_mass"]
 
         print("action: ", action)
+        if action == [0]:
+            print("NO MOVE")
+        elif action == [1]:
+            print("+" + str(Config.JOINT_DELTA_UNIT))
+        elif action == [2]:
+            print("+" + str(2 * Config.JOINT_DELTA_UNIT))
+        elif action == [3]:
+            print("+" + str(3 * Config.JOINT_DELTA_UNIT))
+        elif action == [4]:
+            print("+" + str(4 * Config.JOINT_DELTA_UNIT))
+        elif action == [5]:
+            print("+" + str(5 * Config.JOINT_DELTA_UNIT))
+        elif action == [6]:
+            print("-" + str(Config.JOINT_DELTA_UNIT))
+        elif action == [7]:
+            print("-" + str(2 * Config.JOINT_DELTA_UNIT))
+        elif action == [8]:
+            print("-" + str(3 * Config.JOINT_DELTA_UNIT))
+        elif action == [9]:
+            print("-" + str(4 * Config.JOINT_DELTA_UNIT))
+        elif action == [10]:
+            print("-" + str(5 * Config.JOINT_DELTA_UNIT))
         print("calf angle", state_dict["calf_angle"])
         print("foundation angle", state_dict["foundation_angle"])
         print("center of mass", state_dict["center_of_mass"])
-        print("\n")
+        #print("\n")
 
         #swing_alignment_reward: float = self._calculate_swing_alignment_reward(action)
         center_reward: float = self._calculate_center_of_mass_reward(center_of_mass)
@@ -28,12 +50,12 @@ class RewardCalculator:
         reward: float = center_reward + stability_bonus + tilt_penalty + step_duration_reward
         self._previous_center_of_mass = center_of_mass
 
-        print("center reward: ", center_reward)
-        print("stability_bonus: ", stability_bonus)
-        print("tilt_penalty: ", tilt_penalty)
-        print("step_duration_reward: ", step_duration_reward)
-        print(f"reward: {reward}")
-        print("\n\n")
+        #print("center reward: ", center_reward)
+        #print("stability_bonus: ", stability_bonus)
+        #print("tilt_penalty: ", tilt_penalty)
+        #print("step_duration_reward: ", step_duration_reward)
+        #print(f"reward: {reward}")
+        print("--\n\n")
 
         if step_counter > 55:
             exit()
