@@ -71,3 +71,8 @@ class Config:
     # duration steps monitor
     DURATION_STEPS_PLOT_PATH: str = "./rl_package/duration_steps_plot.png"
     AVERATE_DURATION_STEPS_PLOT_PATH: str = "./rl_package/average_duration_steps_plot.png"
+
+    CALF_ANGLE_KEY: str = "calf_angle"
+    FOUNDATION_ANGLE_KEY: str = "foundation_angle"
+    CALF_CENTER_OF_MASS_KEY: str = "calf_center_of_mass"
+    BASELINK_CENTER_OF_MASS_KEY: str = "baselink_center_of_mass"

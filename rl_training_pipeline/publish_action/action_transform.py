@@ -39,7 +39,8 @@ class ActionTransformer:
                 joint_angle_deltas.append(-5 * Config.JOINT_DELTA_UNIT) # -20
             else:
                 raise ValueError("Invalid action value: {}".format(action))
-            
+
+        print(joint_angle_deltas)
         return joint_angle_deltas # degree
     
     def _calculate_target_joint_angles(self, joint_angle_deltas: list[float], current_joint_angles: list[float]) -> list[float]:

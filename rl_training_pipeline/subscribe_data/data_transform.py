@@ -1,7 +1,5 @@
 import copy
 
-from std_msgs.msg import Float32MultiArray
-
 from subscribe_data.unity_data_store import UnityDataStore
 from config import Config
 
@@ -19,7 +17,7 @@ class DataTransformer():
         
     def transform_untiy_data_to_state(self) -> dict[str, float]:
         
-        unity_data: dict[str, Float32MultiArray] = {}
+        unity_data: dict[str, float] = {}
         data_transformed: dict[str, float] = {}
         
         unity_data = self.unity_data_store.get_unity_data()
@@ -30,21 +28,26 @@ class DataTransformer():
         self.prepre_data_state = copy.deepcopy(self.pre_data_state)
         return data_transformed
         
-    def _decomposition_data(self, unity_data: dict[str, Float32MultiArray]) -> dict[str, float]:
+    def _decomposition_data(self, unity_data: dict[str, float]) -> dict[str, float]:
         
         data_decomposed: dict[str, float] = {
-           "calf_angle": unity_data["calf_angle"][0],
-           "foundation_angle": unity_data["foundation_angle"][0],
+           "calf_angle": unity_data[Config.CALF_ANGLE_KEY],
+           "foundation_angle": unity_data[Config.FOUNDATION_ANGLE_KEY],
            "center_of_mass": self._calculate_center_of_mass(unity_data)
         }
+        print(f"calf angle: {data_decomposed['calf_angle']:.3f}")
+        print(f"foundation angle: {data_decomposed['foundation_angle']:.3f}")
+        print(f"center of mass: {data_decomposed['center_of_mass']:.3f}")
+
+        print("\n\n")
 
         return data_decomposed
     
-    def _calculate_center_of_mass(self, unity_data: dict[str, Float32MultiArray]) -> float:
+    def _calculate_center_of_mass(self, unity_data: dict[str, float]) -> float:
         
         total_mass: float = Config.BASE_LINK_MASS + Config.CALF_MASS
-        weighted_mass: float = (unity_data["baselink_center_of_mass"][0] * Config.BASE_LINK_MASS + 
-                                unity_data["calf_center_of_mass"][0] * Config.CALF_MASS)
+        weighted_mass: float = (unity_data[Config.BASELINK_CENTER_OF_MASS_KEY] * Config.BASE_LINK_MASS + 
+                                unity_data[Config.CALF_CENTER_OF_MASS_KEY] * Config.CALF_MASS)
         if total_mass == 0:
             raise ValueError("Total mass is zero. Cannot calculate center of mass.")
         center_of_mass: float = weighted_mass/total_mass

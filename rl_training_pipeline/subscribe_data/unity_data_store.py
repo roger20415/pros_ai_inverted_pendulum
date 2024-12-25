@@ -1,29 +1,33 @@
 import copy
 import time
 
+from std_msgs.msg import Float32
 from std_msgs.msg import Float32MultiArray
 from subscribe_data.waiting_data_monitor import WaitingDataMonitor
+
+from config import Config
 
 class UnityDataStore:
     
     def __init__(self) -> None:
-        self._recieved_unity_data: dict[str, Float32MultiArray] = {}
+        self._recieved_unity_data: dict[str, Float32] = {}
         
         self._if_data_ready_flags: dict[str, bool] = {
-            "calf_angle": False,
-            "foundation_angle": False,
-            "baselink_center_of_mass": False,
-            "calf_center_of_mass": False
+            Config.CALF_ANGLE_KEY: False,
+            Config.FOUNDATION_ANGLE_KEY: False,
+            Config.CALF_CENTER_OF_MASS_KEY: False,
+            Config.BASELINK_CENTER_OF_MASS_KEY: False
         }
     
     def get_unity_data(self) -> dict:
         return copy.deepcopy(self._recieved_unity_data)
 
-    def store_received_data(self, key: str, msg: Float32MultiArray) -> None:
-
-        self._recieved_unity_data[key] = msg.data
-        self._if_data_ready_flags[key] = True
-
+    def split_and_store_received_array(self, msg: Float32MultiArray) -> None:
+        self._store_received_data(Config.CALF_ANGLE_KEY, msg.data[0])
+        self._store_received_data(Config.FOUNDATION_ANGLE_KEY, msg.data[1])
+        self._store_received_data(Config.CALF_CENTER_OF_MASS_KEY, msg.data[2])
+        self._store_received_data(Config.BASELINK_CENTER_OF_MASS_KEY, msg.data[3])
+        
     def wait_all_data_ready(self, waiting_data_monitor: WaitingDataMonitor, timeout: float = 0.1) -> None:
         start_time: float = time.time()
         last_log_time: float = start_time
@@ -42,4 +46,8 @@ class UnityDataStore:
             if_all_data_ready = True
         
         return if_all_data_ready
+
+    def _store_received_data(self, key: str, data: float) -> None:
+        self._recieved_unity_data[key] = data
+        self._if_data_ready_flags[key] = True
         
