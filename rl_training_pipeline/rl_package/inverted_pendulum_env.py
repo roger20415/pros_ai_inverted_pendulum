@@ -38,7 +38,7 @@ class InvertedPendulumEnv(gym.Env):
         
     def step(self, action):
         self.action_manager.process_and_publish_actions(action, [self._state_dict.get("calf_angle", 0)])
-        time.sleep(Config.WATIING_TIME_PER_STEP)
+        #time.sleep(Config.WATIING_TIME_PER_STEP)
         self._update_state()
         reward: float = self.reward_calculator.calculate_reward(self._state_dict, self._step_counter)
         terminated: bool = self._should_terminate(self._state_dict)
