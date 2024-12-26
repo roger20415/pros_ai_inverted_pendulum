@@ -36,10 +36,10 @@ class DataTransformer():
            "center_of_mass": self._calculate_center_of_mass(unity_data)
         }
         print(f"calf angle: {data_decomposed['calf_angle']:.3f}")
-        print(f"foundation angle: {data_decomposed['foundation_angle']:.3f}")
-        print(f"center of mass: {data_decomposed['center_of_mass']:.3f}")
+        #print(f"foundation angle: {data_decomposed['foundation_angle']:.3f}")
+        #print(f"center of mass: {data_decomposed['center_of_mass']:.3f}")
 
-        print("\n\n")
+        #print("\n\n")
 
         return data_decomposed
     
