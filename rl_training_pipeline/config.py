@@ -10,8 +10,8 @@ class ValidMode(Enum):
 class Config:
 
     # unity config
-    BASE_LINK_MASS: float = 141.3327
-    CALF_MASS: float = 29.71538
+    BASE_LINK_MASS: float = 0.06375173
+    CALF_MASS: float = 0.01794038
 
     # user cli
     VALID_USER_INPUT_MODE: list[str] = [ValidMode.TRAIN.value, ValidMode.INFERENCE.value]

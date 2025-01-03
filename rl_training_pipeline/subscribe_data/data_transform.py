@@ -1,4 +1,5 @@
 import copy
+import sys
 
 from subscribe_data.unity_data_store import UnityDataStore
 from config import Config
@@ -35,7 +36,7 @@ class DataTransformer():
            "foundation_angle": unity_data[Config.FOUNDATION_ANGLE_KEY],
            "center_of_mass": self._calculate_center_of_mass(unity_data)
         }
-        print(f"calf angle: {data_decomposed['calf_angle']:.3f}")
+        sys.stderr.write(f"calf angle: {data_decomposed['calf_angle']:.3f}")
         #print(f"foundation angle: {data_decomposed['foundation_angle']:.3f}")
         #print(f"center of mass: {data_decomposed['center_of_mass']:.3f}")
 

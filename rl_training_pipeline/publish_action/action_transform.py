@@ -1,3 +1,5 @@
+import sys
+
 import numpy as np
 
 from config import Config
@@ -40,7 +42,7 @@ class ActionTransformer:
             else:
                 raise ValueError("Invalid action value: {}".format(action))
 
-        print(joint_angle_deltas)
+        sys.stderr.write(str(joint_angle_deltas))
         return joint_angle_deltas # degree
     
     def _calculate_target_joint_angles(self, joint_angle_deltas: list[float], current_joint_angles: list[float]) -> list[float]:

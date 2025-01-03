@@ -55,7 +55,7 @@ class InvertedPendulumEnv(gym.Env):
         self.data_manager.reset()
 
         print("\n-----------reset-------------\n")
-        time.sleep(5)
+        time.sleep(1.5)
         self.reward_calculator.reset_previous_center_of_mass()
 
         self.unity_state_manager.set_is_training_paused(True)
