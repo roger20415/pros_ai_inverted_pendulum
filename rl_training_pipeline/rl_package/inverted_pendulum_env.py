@@ -37,7 +37,7 @@ class InvertedPendulumEnv(gym.Env):
         self.action_space = spaces.MultiDiscrete(Config.ACTION_NVEC)
         
     def step(self, action):
-        self.action_manager.process_and_publish_actions(action, [self._state_dict.get("calf_angle", 0)])
+        self.action_manager.process_and_publish_actions(action, [self._state_dict.get(Config.TOP_ANGLE_KEY, 0)])
         #time.sleep(Config.WATIING_TIME_PER_STEP)
         self._update_state()
         reward: float = self.reward_calculator.calculate_reward(self._state_dict, self._step_counter)
@@ -77,9 +77,9 @@ class InvertedPendulumEnv(gym.Env):
         
     def _should_terminate(self, state: dict[str, float]) -> bool:
         terminated: bool = False
-        foundation_angle: float = abs(state["foundation_angle"])
+        calf_angle: float = abs(state[Config.CALF_ANGLE_KEY])
         
-        if foundation_angle > Config.TERMINATE_THRESHOLD:
+        if calf_angle > Config.TERMINATE_THRESHOLD:
             terminated = True
         
         return terminated

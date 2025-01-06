@@ -1,6 +1,4 @@
 from enum import Enum
-from multiprocessing.pool import TERMINATE
-from re import M
 
 class ValidMode(Enum):
     TRAIN: str = '1'
@@ -10,8 +8,8 @@ class ValidMode(Enum):
 class Config:
 
     # unity config
-    BASE_LINK_MASS: float = 0.06375173
-    CALF_MASS: float = 0.01794038
+    TOP_MASS: float = 0.08000553
+    CALF_MASS: float = 0.07169855
 
     # user cli
     VALID_USER_INPUT_MODE: list[str] = [ValidMode.TRAIN.value, ValidMode.INFERENCE.value]
@@ -73,6 +71,7 @@ class Config:
     AVERATE_DURATION_STEPS_PLOT_PATH: str = "./rl_package/average_duration_steps_plot.png"
 
     CALF_ANGLE_KEY: str = "calf_angle"
-    FOUNDATION_ANGLE_KEY: str = "foundation_angle"
+    TOP_ANGLE_KEY: str = "top_angle"
     CALF_CENTER_OF_MASS_KEY: str = "calf_center_of_mass"
-    BASELINK_CENTER_OF_MASS_KEY: str = "baselink_center_of_mass"
+    TOP_CENTER_OF_MASS_KEY: str = "top_center_of_mass"
+    CENTER_OF_MASS_KEY: str = "center_of_mass"

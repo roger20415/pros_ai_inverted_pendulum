@@ -14,19 +14,19 @@ class UnityDataStore:
         
         self._if_data_ready_flags: dict[str, bool] = {
             Config.CALF_ANGLE_KEY: False,
-            Config.FOUNDATION_ANGLE_KEY: False,
+            Config.TOP_ANGLE_KEY: False,
             Config.CALF_CENTER_OF_MASS_KEY: False,
-            Config.BASELINK_CENTER_OF_MASS_KEY: False
+            Config.TOP_CENTER_OF_MASS_KEY: False
         }
     
     def get_unity_data(self) -> dict:
         return copy.deepcopy(self._recieved_unity_data)
 
     def split_and_store_received_array(self, msg: Float32MultiArray) -> None:
-        self._store_received_data(Config.CALF_ANGLE_KEY, msg.data[0])
-        self._store_received_data(Config.FOUNDATION_ANGLE_KEY, msg.data[1])
-        self._store_received_data(Config.CALF_CENTER_OF_MASS_KEY, msg.data[2])
-        self._store_received_data(Config.BASELINK_CENTER_OF_MASS_KEY, msg.data[3])
+        self._store_received_data(Config.TOP_ANGLE_KEY, msg.data[0])
+        self._store_received_data(Config.CALF_ANGLE_KEY, msg.data[1])
+        self._store_received_data(Config.TOP_CENTER_OF_MASS_KEY, msg.data[2])
+        self._store_received_data(Config.CALF_CENTER_OF_MASS_KEY, msg.data[3])
         
     def wait_all_data_ready(self, waiting_data_monitor: WaitingDataMonitor, timeout: float = 0.1) -> None:
         start_time: float = time.time()
