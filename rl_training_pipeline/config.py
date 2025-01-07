@@ -34,10 +34,10 @@ class Config:
     POSITIVE_ACTIONS: list[int] = [1, 2, 3, 4, 5]
     NEGATIVE_ACTIONS: list[int] = [6, 7, 8, 9, 10]
     TERMINATE_THRESHOLD: float = 15.0 # degree
-    WATIING_TIME_PER_STEP: float = 0.0025 # second
+    WATIING_TIME_PER_STEP: float = 0.035 # second
 
     # action
-    JOINT_DELTA_UNIT: float = 4 # degree
+    JOINT_DELTA_UNIT: float = 3 # degree
     MAX_JOINT_ANGLE: float = 120.0 # degree
 
     # reward

@@ -42,10 +42,12 @@ class ActionTransformer:
             else:
                 raise ValueError("Invalid action value: {}".format(action))
 
-        sys.stderr.write(str(joint_angle_deltas))
+        #sys.stderr.write(str(joint_angle_deltas))
         return joint_angle_deltas # degree
     
     def _calculate_target_joint_angles(self, joint_angle_deltas: list[float], current_joint_angles: list[float]) -> list[float]:
+        print("joint_angle_deltas: ", joint_angle_deltas)
+        print("current_joint_angles: ", current_joint_angles)
         return np.add(joint_angle_deltas, current_joint_angles).tolist()
     
     def _limit_target_joint_angles(self, target_joint_angles: list[float]) -> list[float]:
