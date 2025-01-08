@@ -33,7 +33,7 @@ class UnityDataStore:
         last_log_time: float = start_time
         while not self._check_if_all_data_ready():
             if time.time() - last_log_time > timeout:
-                print("Waiting for Unity data timed out.")
+                print("\033[91mWaiting for Unity data timed out.\033[0m")
                 last_log_time = time.time()
         waiting_data_monitor.append_waiting_time(int((time.time() - start_time) * 1e6)) # convert s to µs
         

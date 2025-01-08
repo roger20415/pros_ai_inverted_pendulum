@@ -9,9 +9,10 @@ class ActionManager:
         self.action_transformer = ActionTransformer()
         self.action_publisher = ActionPublisherNode()
         
-    def process_and_publish_actions(self, action: np.ndarray, current_joint_positions: list[float]) -> None:
-        target_joint_angles: list[float] = self.action_transformer.transfer_actions_to_target_joint_angles(
-            action, current_joint_positions)
+    def process_and_publish_actions(self, action: np.ndarray) -> None:
+        #target_joint_angles: list[float] = self.action_transformer.transfer_actions_to_target_joint_angles(
+        #    action, current_joint_positions)
+        target_joint_angles: list[float] = action.tolist()
         self.action_publisher.publish_target_joint_angles(target_joint_angles)
         
     def get_action_publisher_node(self) -> Node:

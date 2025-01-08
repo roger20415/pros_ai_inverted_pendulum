@@ -6,6 +6,7 @@ class ComMonitor:
         self._com_list: list[float] = []
 
     def append_com(self, com: float) -> None:
+        print("com: ", com)
         self._com_list.append(com)
 
     def save_com_plot(self, save_path: str) -> None:

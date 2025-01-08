@@ -19,7 +19,7 @@ class Config:
     SAVE_MODEL_PATH: str = "./rl_package/Model/inverted_pendulum_PPO_2024-11-20.pt"
     
     SAVE_MODEL_FREQUENCY: int = 1024
-    TRAINING_STEPS: int = 1024 * 100
+    TRAINING_STEPS: int = 1024 * 10
     LOG_INTERVAL: int = 1
     
     LEARNING_RATE: float = 0.001
@@ -29,27 +29,21 @@ class Config:
     GAMMA: float = 0.995
 
     # stable baselines3 env
-    ACTION_NVEC: list[int] = [11]
+    ACTION_NVEC: int = 1
     NO_MOVE_ACTION: int = 0
     POSITIVE_ACTIONS: list[int] = [1, 2, 3, 4, 5]
     NEGATIVE_ACTIONS: list[int] = [6, 7, 8, 9, 10]
-    TERMINATE_THRESHOLD: float = 15.0 # degree
+    TERMINATE_THRESHOLD: float = 3.0 # degree
     WATIING_TIME_PER_STEP: float = 0.035 # second
 
     # action
-    JOINT_DELTA_UNIT: float = 3 # degree
-    MAX_JOINT_ANGLE: float = 120.0 # degree
+    JOINT_DELTA_UNIT: float = 3.0 # degree
+    MAX_JOINT_ANGLE: float = 3.0 # degree
 
     # reward
-    SWING_ALIGNMENT_REWARD: float = 5.0 # reward points
-    CENTER_REWARD_WEIGHT: float = -2000.0
-    STABILITY_BONUS_THRESHOLD: float = 1.5 # degree
-    STABILITY_BONUS: float = 4.0 # reward points
-    TILT_PENALTY_THRESHOLD: float = 4.5 # degree
-    TILT_PENALTY: float = -10.0 # reward points
-
-    STEP_DURATION_GROWTH_RATE: float = 0.42
-    STEP_COUNT_THRESHOLD: int = 9
+    STABLE_THRESHOLD: float = 0.5 # degree
+    STABLE_REWARD_WEIGHT: float = 1.0 # positive
+    CENTER_OF_MASS_REWARD_WEIGHT: float = -200000.0 # negative
 
     # waiting data time monitor
     WAITING_TIME_STOP_THRESHOLD: int =  500000 # µs
@@ -65,6 +59,10 @@ class Config:
 
     # com monitor 
     COM_PLOT_PATH: str = "./subscribe_data/com_plot.png"
+
+    # reward monitor
+    REWARD_PLOT_PATH: str = "./rl_package/reward_plot.png"
+    AVERAGE_REWARD_PLOT_PATH: str = "./rl_package/average_reward_plot.png"
 
     # duration steps monitor
     DURATION_STEPS_PLOT_PATH: str = "./rl_package/duration_steps_plot.png"

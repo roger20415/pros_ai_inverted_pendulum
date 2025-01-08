@@ -16,6 +16,7 @@ class ActionPublisherNode(Node):
         
         
     def publish_target_joint_angles(self, target_joint_angles: list[float]) -> None:
+        print("publihs target_joint_angles: ", target_joint_angles)
         msg = JointTrajectoryPoint()
         msg.positions = target_joint_angles
         msg.velocities = [0.0] * len(target_joint_angles)
