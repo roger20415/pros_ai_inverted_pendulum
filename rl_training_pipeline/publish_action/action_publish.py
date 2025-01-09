@@ -12,9 +12,7 @@ class ActionPublisherNode(Node):
             '/inverted_pendulum_target_joint_angles',
             10
         )
-        
-        
-        
+          
     def publish_target_joint_angles(self, target_joint_angles: list[float]) -> None:
         print("publihs target_joint_angles: ", target_joint_angles)
         msg = JointTrajectoryPoint()
