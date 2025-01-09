@@ -30,18 +30,13 @@ class Config:
 
     # stable baselines3 env
     ACTION_NVEC: int = 1
-    NO_MOVE_ACTION: int = 0
-    POSITIVE_ACTIONS: list[int] = [1, 2, 3, 4, 5]
-    NEGATIVE_ACTIONS: list[int] = [6, 7, 8, 9, 10]
     TERMINATE_THRESHOLD: float = 20.0 # degree
     WATIING_TIME_PER_STEP: float = 0.035 # second
 
     # action
-    JOINT_DELTA_UNIT: float = 3.0 # degree
     MAX_JOINT_ANGLE: float = 3.0 # degree
 
     # reward
-    STABLE_THRESHOLD: float = 0.5 # degree
     STABLE_REWARD_WEIGHT: float = 1.0 # positive
     CENTER_OF_MASS_REWARD_WEIGHT: float = -200000.0 # negative
 
@@ -68,6 +63,7 @@ class Config:
     DURATION_STEPS_PLOT_PATH: str = "./plots/duration_steps_plot.png"
     AVERATE_DURATION_STEPS_PLOT_PATH: str = "./plots/average_duration_steps_plot.png"
 
+    # data dictionary keys
     CALF_ANGLE_KEY: str = "calf_angle"
     TOP_ANGLE_KEY: str = "top_angle"
     CALF_CENTER_OF_MASS_KEY: str = "calf_center_of_mass"

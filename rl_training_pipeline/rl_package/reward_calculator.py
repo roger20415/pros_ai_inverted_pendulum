@@ -1,5 +1,3 @@
-import numpy as np
-
 from config import Config
 
 class RewardCalculator:
@@ -8,19 +6,13 @@ class RewardCalculator:
         self._previous_center_of_mass: float = 0.0
 
     def calculate_reward(self, state_dict: dict[str, float], step_counter: int) -> float:
-
         center_of_mass: float = state_dict[Config.CENTER_OF_MASS_KEY]
-        calf_angle: float = state_dict[Config.CALF_ANGLE_KEY]
 
         reward: float = 0.0
         reward += self._cal_stable_reward(step_counter)
-        print("stable reward:", reward)
-
         reward += self._cal_delta_center_of_mass_reward(center_of_mass)
-        print("delta center of mass reward:", reward)
 
         self._previous_center_of_mass = center_of_mass
-
         return reward
     
     def reset_previous_center_of_mass(self) -> None:
