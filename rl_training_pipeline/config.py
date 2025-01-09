@@ -47,26 +47,26 @@ class Config:
 
     # waiting data time monitor
     WAITING_TIME_STOP_THRESHOLD: int =  500000 # µs
-    WAITING_DATA_TIME_PLOT_PATH: str = "./waiting_data_time_plot.png"
+    WAITING_DATA_TIME_PLOT_PATH: str = "./plots/waiting_data_time_plot.png"
 
     # Fps monitor
     FPS_LOG_INTERVAL: int = 32 # training steps
-    FPS_PLOT_PATH: str = "./rl_package/fps_plot.png"
+    FPS_PLOT_PATH: str = "./plots/fps_plot.png"
 
     LOW_FPS_THRESHOLD: float = 0.0
     MAX_LOW_FPS_STREAK: int = 4
     FPS_STOPPER_SLEEP_TIME: float = 10.0
 
     # com monitor 
-    COM_PLOT_PATH: str = "./subscribe_data/com_plot.png"
+    COM_PLOT_PATH: str = "./plots/com_plot.png"
 
     # reward monitor
-    REWARD_PLOT_PATH: str = "./rl_package/reward_plot.png"
-    AVERAGE_REWARD_PLOT_PATH: str = "./rl_package/average_reward_plot.png"
+    REWARD_PLOT_PATH: str = "./plots/reward_plot.png"
+    AVERAGE_REWARD_PLOT_PATH: str = "./plots/average_reward_plot.png"
 
     # duration steps monitor
-    DURATION_STEPS_PLOT_PATH: str = "./rl_package/duration_steps_plot.png"
-    AVERATE_DURATION_STEPS_PLOT_PATH: str = "./rl_package/average_duration_steps_plot.png"
+    DURATION_STEPS_PLOT_PATH: str = "./plots/duration_steps_plot.png"
+    AVERATE_DURATION_STEPS_PLOT_PATH: str = "./plots/average_duration_steps_plot.png"
 
     CALF_ANGLE_KEY: str = "calf_angle"
     TOP_ANGLE_KEY: str = "top_angle"
