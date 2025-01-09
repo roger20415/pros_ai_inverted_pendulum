@@ -1,3 +1,5 @@
+import sys
+
 from config import Config
 
 class RewardCalculator:
@@ -8,9 +10,11 @@ class RewardCalculator:
     def calculate_reward(self, state_dict: dict[str, float], step_counter: int) -> float:
         center_of_mass: float = state_dict[Config.CENTER_OF_MASS_KEY]
 
-        reward: float = 0.0
-        reward += self._cal_stable_reward(step_counter)
-        reward += self._cal_delta_center_of_mass_reward(center_of_mass)
+        stable_reward: float = self._cal_stable_reward(step_counter)
+        delta_com_reward: float = self._cal_delta_center_of_mass_reward(center_of_mass)
+        reward: float = stable_reward + delta_com_reward
+        sys.stderr.write(f"stable_reward: {stable_reward}\n")
+        sys.stderr.write(f"delta_com_reward: {delta_com_reward}\n")
 
         self._previous_center_of_mass = center_of_mass
         return reward

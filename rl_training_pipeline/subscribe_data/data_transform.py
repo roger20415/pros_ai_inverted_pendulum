@@ -31,7 +31,7 @@ class DataTransformer():
             Config.CALF_ANGLE_KEY: unity_data[Config.CALF_ANGLE_KEY],
             Config.CENTER_OF_MASS_KEY: self._calculate_center_of_mass(unity_data)
         }
-        sys.stderr.write(f"top angle: {data_decomposed[Config.TOP_ANGLE_KEY]:.3f}")
+        sys.stderr.write(f"top angle: {data_decomposed[Config.TOP_ANGLE_KEY]:.3f}\n")
         return data_decomposed
     
     def _calculate_center_of_mass(self, unity_data: dict[str, float]) -> float:

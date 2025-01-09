@@ -25,7 +25,7 @@ class DataSubscriberNode(Node):
         now = datetime.now()
         now_seconds = now.second + now.microsecond / 1_000_000
         self._unity_data_store.split_and_store_received_array(msg)
-        sys.stderr.write(f"\033[35m{msg.data}\033[0m")
+        sys.stderr.write(f"\033[35m{msg.data}\033[0m\n")
         self._print_pub_sub_info(
             msg.data[4],
             msg.data[5],
