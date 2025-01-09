@@ -28,6 +28,14 @@ class PPOModelManager:
         model.learn(total_timesteps=Config.TRAINING_STEPS, 
                     callback=callbacks,
                     log_interval=Config.LOG_INTERVAL)
+    
+    def inference(self, env: gym.Env) -> None:
+        model = self._load_or_create_model(env)
+        obs, _ = env.reset()
+        terminated = False
+        while not terminated:
+            action, _ = model.predict(obs)
+            obs, _, terminated, _, _ = env.step(action)
         
     def _load_or_create_model(self, env: gym.Env) -> PPO:
         

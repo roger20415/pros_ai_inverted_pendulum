@@ -39,6 +39,9 @@ def main() -> None:
 
         if user_input_mode == ValidMode.TRAIN.value:
             ppo_model_manager.train_model(env, callbacks)
+        elif user_input_mode == ValidMode.INFERENCE.value:
+            ppo_model_manager.inference(env)
+
     
     except KeyboardInterrupt:
         print("Shutting down...")

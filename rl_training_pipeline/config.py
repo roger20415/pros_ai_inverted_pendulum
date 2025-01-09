@@ -33,7 +33,7 @@ class Config:
     NO_MOVE_ACTION: int = 0
     POSITIVE_ACTIONS: list[int] = [1, 2, 3, 4, 5]
     NEGATIVE_ACTIONS: list[int] = [6, 7, 8, 9, 10]
-    TERMINATE_THRESHOLD: float = 3.0 # degree
+    TERMINATE_THRESHOLD: float = 20.0 # degree
     WATIING_TIME_PER_STEP: float = 0.035 # second
 
     # action
