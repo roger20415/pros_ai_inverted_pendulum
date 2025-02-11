@@ -34,8 +34,10 @@ class UnityDataStore:
         if self._check_if_all_data_ready():
             self._data_ready_event.set()
         
-    def wait_all_data_ready(self, waiting_data_monitor: WaitingDataMonitor, timeout: float = 0.1) -> None:
-        max_retries: int = 10
+    def wait_all_data_ready(self, waiting_data_monitor: WaitingDataMonitor, timeout: float = 0.05) -> None:
+        start_time: float = time.time()
+
+        max_retries: int = 20
         retries: int = 0
 
         while retries < max_retries:
@@ -52,7 +54,8 @@ class UnityDataStore:
         if retries == max_retries:
             print("\033[91mError: Failed to receive Unity data.\033[0m")
 
-        
+        waiting_data_monitor.append_waiting_time(int((time.time() - start_time) * 1e6)) # convert s to µs
+
     def turn_all_data_flag_to_unready(self) -> None:
         self._if_data_ready_flags = dict.fromkeys(self._if_data_ready_flags.keys(), False)
         self._data_ready_event.clear()
