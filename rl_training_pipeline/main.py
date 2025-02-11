@@ -53,7 +53,6 @@ def main() -> None:
     data_manager.com_monitor.save_com_plot(Config.COM_PLOT_PATH)
         
     rclpy.shutdown()
-    
 
 if __name__ == "__main__":
     main()
