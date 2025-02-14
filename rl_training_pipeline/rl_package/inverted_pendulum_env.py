@@ -76,7 +76,7 @@ class InvertedPendulumEnv(gym.Env):
         return self._state_array, {}
     
     def _update_state(self) -> None:
-        self._state_dict = self.data_manager.get_obervation()
+        self._state_dict = self.data_manager.get_observation()
         self._state_array = Utils.flatten_dict_to_array(self._state_dict.copy())
         
     def _should_terminate(self, state: dict[str, float]) -> bool:

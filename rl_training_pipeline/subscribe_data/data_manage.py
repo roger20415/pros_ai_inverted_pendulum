@@ -14,7 +14,7 @@ class DataManager:
         self.waiting_data_monitor = WaitingDataMonitor()
         self.com_monitor = ComMonitor()
         
-    def get_obervation(self) -> dict[str, float]:
+    def get_observation(self) -> dict[str, float]:
         
         self.unity_data_store.turn_all_data_flag_to_unready()
         self.unity_data_store.wait_all_data_ready(self.waiting_data_monitor)
