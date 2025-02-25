@@ -33,6 +33,10 @@ class Config:
     TERMINATE_THRESHOLD: float = 20.0 # degree
     WATIING_TIME_PER_STEP: float = 0.035 # second
 
+    # servo motor action
+    SERVO_DEAD_BAND_DEGREE: float = 0.18 # degree
+    ANGLE_SPACE: int = 41
+
     # action
     MAX_JOINT_ANGLE: float = 3.0 # degree
 

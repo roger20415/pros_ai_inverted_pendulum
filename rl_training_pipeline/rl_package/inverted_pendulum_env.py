@@ -37,10 +37,7 @@ class InvertedPendulumEnv(gym.Env):
         self.observation_space = spaces.Box(
             low=-np.inf, high=np.inf, shape=(self._observation_shape,), dtype=np.float32
         )
-        self.action_space = spaces.Box(low=-Config.MAX_JOINT_ANGLE, 
-                                       high=Config.MAX_JOINT_ANGLE, 
-                                       shape=(Config.ACTION_NVEC,), 
-                                       dtype=np.float32)
+        self.action_space = spaces.MultiDiscrete([Config.ANGLE_SPACE] * Config.ACTION_NVEC)
         
     def step(self, action):
         self.action_manager.process_and_publish_actions(action)
