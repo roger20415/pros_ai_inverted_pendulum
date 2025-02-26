@@ -33,6 +33,9 @@ class Config:
     TERMINATE_THRESHOLD: float = 20.0 # degree
     WATIING_TIME_PER_STEP: float = 0.035 # second
 
+    # env
+    SERVO_STEP_ANGLE: float = 1.0 # degree
+
     # action
     MAX_JOINT_ANGLE: float = 3.0 # degree
 
