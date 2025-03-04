@@ -69,7 +69,7 @@ class InvertedPendulumEnv(gym.Env):
 
         print("\n-----------reset-------------\n")
         time.sleep(1.5)
-        self.reward_calculator.reset_previous_center_of_mass()
+        self.reward_calculator.reset_pre_calf_angle()
         self._reset_unity_scene()
         self._update_state()
 

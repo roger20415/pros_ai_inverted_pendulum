@@ -1,6 +1,5 @@
 from utils import Utils
 
-# COM: Center of Mass
 class DurationStepMonitor:
     def __init__(self) -> None:
         self._duration_steps: int = 0

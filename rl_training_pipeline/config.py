@@ -7,10 +7,6 @@ class ValidMode(Enum):
 
 class Config:
 
-    # unity config
-    TOP_MASS: float = 0.08000553
-    CALF_MASS: float = 0.07169855
-
     # user cli
     VALID_USER_INPUT_MODE: list[str] = [ValidMode.TRAIN.value, ValidMode.INFERENCE.value]
 
@@ -41,7 +37,7 @@ class Config:
 
     # reward
     STABLE_REWARD_WEIGHT: float = 1.0 # positive
-    CENTER_OF_MASS_REWARD_WEIGHT: float = -200000.0 # negative
+    DELTA_CALF_ANGLE_REWARD_WEIGHT: float = -1000.0 # negative
 
     # waiting data time monitor
     WAITING_TIME_STOP_THRESHOLD: int =  500000 # µs
@@ -55,9 +51,6 @@ class Config:
     MAX_LOW_FPS_STREAK: int = 4
     FPS_STOPPER_SLEEP_TIME: float = 10.0
 
-    # com monitor 
-    COM_PLOT_PATH: str = "./plots/com_plot.png"
-
     # reward monitor
     REWARD_PLOT_PATH: str = "./plots/reward_plot.png"
     AVERAGE_REWARD_PLOT_PATH: str = "./plots/average_reward_plot.png"
@@ -69,6 +62,3 @@ class Config:
     # data dictionary keys
     CALF_ANGLE_KEY: str = "calf_angle"
     TOP_ANGLE_KEY: str = "top_angle"
-    CALF_CENTER_OF_MASS_KEY: str = "calf_center_of_mass"
-    TOP_CENTER_OF_MASS_KEY: str = "top_center_of_mass"
-    CENTER_OF_MASS_KEY: str = "center_of_mass"
