@@ -37,7 +37,8 @@ class Config:
 
     # reward
     STABLE_REWARD_WEIGHT: float = 1.0 # positive
-    DELTA_CALF_ANGLE_REWARD_WEIGHT: float = -1000.0 # negative
+    DELTA_CALF_ANGLE_REWARD_WEIGHT: float = -6000.0 # negative
+    FLIP_BONUS: float = 60.0 # positive
 
     # waiting data time monitor
     WAITING_TIME_STOP_THRESHOLD: int =  500000 # µs

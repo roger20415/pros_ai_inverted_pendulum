@@ -30,7 +30,6 @@ class DataTransformer():
             Config.TOP_ANGLE_KEY: unity_data[Config.TOP_ANGLE_KEY],
             Config.CALF_ANGLE_KEY: unity_data[Config.CALF_ANGLE_KEY],
         }
-        sys.stderr.write(f"top angle: {data_decomposed[Config.TOP_ANGLE_KEY]:.3f}\n")
         return data_decomposed
     
     def _add_key(self, data_decomposed: dict[str, float]) -> dict[str, float]:
