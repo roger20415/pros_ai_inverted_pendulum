@@ -1,5 +1,5 @@
 import copy
-import sys
+import random
 
 from subscribe_data.unity_data_store import UnityDataStore
 from config import Config
@@ -19,6 +19,7 @@ class DataTransformer():
         data_transformed: dict[str, float] = {}
         
         unity_data = self.unity_data_store.get_unity_data()
+        unity_data = self._add_obs_noise(unity_data)
         data_decomposed = self._decomposition_data(unity_data)
         data_transformed = self._add_key(data_decomposed)
         self.pre_data_state = copy.deepcopy(data_decomposed)
@@ -50,3 +51,13 @@ class DataTransformer():
         data_decomposed["prepre_"+Config.CALF_ANGLE_KEY] = self.prepre_data_state.get("pre_"+Config.CALF_ANGLE_KEY, 0)
     
         return data_decomposed
+    
+    def _add_obs_noise(self, unity_data: dict[str, float]) -> dict[str, float]:
+        noisy_data: dict[str, float] = {}
+
+        for key, value in unity_data.items():
+            noise = random.uniform(-Config.OBS_NOISE_LEVEL, Config.OBS_NOISE_LEVEL)
+            noisy_data[key] = value + noise
+            print(f"add noise: {key}, {noise}")
+
+        return noisy_data

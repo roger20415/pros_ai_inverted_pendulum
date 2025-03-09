@@ -15,7 +15,7 @@ class Config:
     SAVE_MODEL_PATH: str = "./rl_package/Model/inverted_pendulum_PPO_2024-11-20.pt"
     
     SAVE_MODEL_FREQUENCY: int = 1024
-    TRAINING_STEPS: int = 1024 * 10
+    TRAINING_STEPS: int = 1024 * 20
     LOG_INTERVAL: int = 1
     
     LEARNING_RATE: float = 0.001
@@ -63,3 +63,7 @@ class Config:
     # data dictionary keys
     CALF_ANGLE_KEY: str = "calf_angle"
     TOP_ANGLE_KEY: str = "top_angle"
+
+
+    # data transform
+    OBS_NOISE_LEVEL: float = 0.1
