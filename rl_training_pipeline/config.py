@@ -64,6 +64,6 @@ class Config:
     CALF_ANGLE_KEY: str = "calf_angle"
     TOP_ANGLE_KEY: str = "top_angle"
 
-
-    # data transform
-    OBS_NOISE_LEVEL: float = 0.1
+    # noise level
+    OBS_NOISE_LEVEL: float = 0.5
+    ACTION_NOISE_LEVEL: float = 0.5

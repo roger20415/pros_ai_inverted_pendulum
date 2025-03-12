@@ -43,6 +43,7 @@ class InvertedPendulumEnv(gym.Env):
                                        dtype=np.float32)
         
     def step(self, action):
+        self._trigger_reset_if_updated_params()
         self.action_manager.process_and_publish_actions(action)
         self._update_state()
         for key, value in self._state_dict.items():
@@ -98,3 +99,7 @@ class InvertedPendulumEnv(gym.Env):
             if i % 1000000 == 0:
                 print("Unity scene reset failed. Try again...")
                 self.unity_state_manager.get_is_training_paused()
+
+    def _trigger_reset_if_updated_params(self) -> None:
+        if (self._total_step_counter % Config.N_STEPS == 0) and (self._total_step_counter != 0):
+            self.reset()
