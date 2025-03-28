@@ -65,5 +65,5 @@ class Config:
     TOP_ANGLE_KEY: str = "top_angle"
 
     # noise level
-    OBS_NOISE_LEVEL: float = 0.5
-    ACTION_NOISE_LEVEL: float = 0.5
+    OBS_NOISE_LEVEL: float = 0
+    ACTION_NOISE_LEVEL: float = 0
