@@ -9,11 +9,13 @@ class ActionManager:
     def __init__(self) -> None:
         self.action_publisher = ActionPublisherNode()
         
-    def process_and_publish_actions(self, action: np.ndarray) -> None:
+    def process_and_publish_actions(self, action: np.ndarray) -> np.ndarray:
         action = self._quantize_action_to_servo_steps(action)
         action = self._add_action_noise(action)
         target_joint_angles: list[float] = action.tolist()
         self.action_publisher.publish_target_joint_angles(target_joint_angles)
+
+        return action
         
     def get_action_publisher_node(self) -> Node:
         return self.action_publisher

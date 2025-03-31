@@ -30,7 +30,7 @@ class Config:
     WATIING_TIME_PER_STEP: float = 0.035 # second
 
     # env
-    SERVO_STEP_ANGLE: float = 1.0 # degree
+    SERVO_STEP_ANGLE: float = 1.8 # degree
 
     # action
     MAX_JOINT_ANGLE: float = 3.0 # degree

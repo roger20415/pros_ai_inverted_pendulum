@@ -14,8 +14,7 @@ class UnityDataStore:
         self._received_unity_data: dict[str, Float32] = {}
         
         self._if_data_ready_flags: dict[str, bool] = {
-            Config.CALF_ANGLE_KEY: False,
-            Config.TOP_ANGLE_KEY: False,
+            Config.CALF_ANGLE_KEY: False
         }
 
         self._data_ready_event = threading.Event()
@@ -25,9 +24,13 @@ class UnityDataStore:
 
     def split_and_store_received_array(self, msg: Float32MultiArray) -> None:
         self._store_received_data(Config.CALF_ANGLE_KEY, msg.data[0])
-
+        self._turn_data_flag_to_ready(Config.CALF_ANGLE_KEY)
         if self._check_if_all_data_ready():
             self._data_ready_event.set()
+    
+    def record_pub_servo_angle(self, pub_servo_angle: float) -> None:
+        self._store_received_data(Config.TOP_ANGLE_KEY, pub_servo_angle)
+        print(f"pub_servo_angle: {pub_servo_angle}")
         
     def wait_all_data_ready(self, waiting_data_monitor: WaitingDataMonitor, timeout: float = 0.05) -> None:
         start_time: float = time.time()
@@ -64,5 +67,7 @@ class UnityDataStore:
 
     def _store_received_data(self, key: str, data: float) -> None:
         self._received_unity_data[key] = data
+
+    def _turn_data_flag_to_ready(self, key: str) -> None:
         self._if_data_ready_flags[key] = True
         

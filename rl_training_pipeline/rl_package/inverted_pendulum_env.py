@@ -31,6 +31,7 @@ class InvertedPendulumEnv(gym.Env):
         self._step_counter: int = 0
         self._total_step_counter: int = 0
 
+        self.data_manager.unity_data_store.record_pub_servo_angle(0)
         self._update_state()
         self._observation_shape: int = len(self._state_array)
         
@@ -44,7 +45,8 @@ class InvertedPendulumEnv(gym.Env):
         
     def step(self, action):
         self._trigger_reset_if_updated_params()
-        self.action_manager.process_and_publish_actions(action)
+        action_pub: np.ndarray = self.action_manager.process_and_publish_actions(action)
+        self.data_manager.unity_data_store.record_pub_servo_angle(action_pub[0])
         self._update_state()
         for key, value in self._state_dict.items():
             print(f"{key}, {value}")
