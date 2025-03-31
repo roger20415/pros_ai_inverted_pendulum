@@ -58,6 +58,5 @@ class DataTransformer():
         for key, value in unity_data.items():
             noise = random.uniform(-Config.OBS_NOISE_LEVEL, Config.OBS_NOISE_LEVEL)
             noisy_data[key] = value + noise
-            print(f"add noise: {key}, {noise}")
 
         return noisy_data

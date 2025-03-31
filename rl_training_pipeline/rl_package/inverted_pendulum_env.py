@@ -8,7 +8,6 @@ from rl_package.duration_step_monitor import DurationStepMonitor
 from rl_package.reward_monitor import RewardMonitor
 from publish_action.action_manage import ActionManager
 from subscribe_data.data_manage import DataManager
-from unity_state.unity_state_communication import UnityStateManagerNode
 from rl_package.reward_calculator import RewardCalculator
 from utils import Utils
 from config import Config
@@ -16,11 +15,10 @@ from config import Config
 class InvertedPendulumEnv(gym.Env):
     ENV_NAME: str = 'InvertedPendulum-v0'
 
-    def __init__(self, data_manager: DataManager, action_manager: ActionManager, unity_state_manager: UnityStateManagerNode) -> None:
+    def __init__(self, data_manager: DataManager, action_manager: ActionManager) -> None:
         super(InvertedPendulumEnv, self).__init__()
         self.data_manager = data_manager
         self.action_manager = action_manager
-        self.unity_state_manager = unity_state_manager
         self.reward_calculator = RewardCalculator()
         self.reward_monitor = RewardMonitor()
         self.duration_steps_monitor = DurationStepMonitor()
@@ -75,7 +73,6 @@ class InvertedPendulumEnv(gym.Env):
         print("\n-----------reset-------------\n")
         time.sleep(1.5)
         self.reward_calculator.reset_pre_calf_angle()
-        self._reset_unity_scene()
         self._update_state()
 
         return self._state_array, {}
@@ -89,18 +86,8 @@ class InvertedPendulumEnv(gym.Env):
         calf_angle: float = abs(state[Config.CALF_ANGLE_KEY])
         
         if calf_angle > Config.TERMINATE_THRESHOLD:
-            terminated = True     
+            terminated = True
         return terminated
-    
-    def _reset_unity_scene(self) -> None:
-        self.unity_state_manager.set_is_training_paused(True)
-        self.unity_state_manager.publish_reset_unity_scene(True)
-        i: int = 0
-        while(self.unity_state_manager.get_is_training_paused()):
-            i += 1
-            if i % 1000000 == 0:
-                print("Unity scene reset failed. Try again...")
-                self.unity_state_manager.get_is_training_paused()
 
     def _trigger_reset_if_updated_params(self) -> None:
         if (self._total_step_counter % Config.N_STEPS == 0) and (self._total_step_counter != 0):
