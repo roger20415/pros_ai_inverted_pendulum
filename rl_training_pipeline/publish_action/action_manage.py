@@ -21,7 +21,12 @@ class ActionManager:
         return self.action_publisher
     
     def _quantize_action_to_servo_steps(self, action: np.ndarray) -> np.ndarray:
-        return np.round(action / Config.SERVO_STEP_ANGLE) * Config.SERVO_STEP_ANGLE
+        if action < 0.5 and action > -0.5:
+            return np.array([0])
+        elif action > 0.1:
+            return np.array([Config.SERVO_STEP_ANGLE])
+        elif action < -0.1:
+            return np.array([-Config.SERVO_STEP_ANGLE])
 
     def _add_action_noise(self, action: np.ndarray) -> np.ndarray:
         noisy_action: list[float] = []
