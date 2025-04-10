@@ -30,10 +30,10 @@ class Config:
     WATIING_TIME_PER_STEP: float = 0.035 # second
 
     # env
-    SERVO_STEP_ANGLE: float = 1.0 # degree
+    SERVO_STEP_ANGLE: float = 1.8*3 # degree
 
     # action
-    MAX_JOINT_ANGLE: float = 3.0 # degree
+    MAX_JOINT_ANGLE: float = 20.0 # degree
 
     # reward
     STABLE_REWARD_WEIGHT: float = 1.0 # positive
@@ -65,5 +65,5 @@ class Config:
     TOP_ANGLE_KEY: str = "top_angle"
 
     # noise level
-    OBS_NOISE_LEVEL: float = 0.5
-    ACTION_NOISE_LEVEL: float = 0.5
+    OBS_NOISE_LEVEL: float = 0.0
+    ACTION_NOISE_LEVEL: float = 0.0
