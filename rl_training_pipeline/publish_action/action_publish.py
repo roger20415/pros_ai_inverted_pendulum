@@ -4,12 +4,12 @@ from trajectory_msgs.msg import JointTrajectoryPoint
 
 class ActionPublisherNode(Node):
     def __init__(self) -> None:
-        super().__init__('inverted_pendulum_action_publisher_node')
-        self.get_logger().info("Start inverted pendulum action publisher node.")
+        super().__init__('action_publisher_node')
+        self.get_logger().info("Start action publisher node.")
         
         self._target_joint_angles_publisher = self.create_publisher(
             JointTrajectoryPoint,
-            '/inverted_pendulum_target_joint_angles',
+            '/joint_angles',
             10
         )
           

@@ -11,8 +11,8 @@ class Config:
     VALID_USER_INPUT_MODE: list[str] = [ValidMode.TRAIN.value, ValidMode.INFERENCE.value]
 
     # PPO model manage
-    LOAD_MODEL_PATH: str = "./rl_package/Model/inverted_pendulum_PPO_2024-11-20.pt"
-    SAVE_MODEL_PATH: str = "./rl_package/Model/inverted_pendulum_PPO_2024-11-20.pt"
+    LOAD_MODEL_PATH: str = "./rl_package/Model/PPO_2025-04-07.pt"
+    SAVE_MODEL_PATH: str = "./rl_package/Model/PPO_2025-04-07.pt"
     
     SAVE_MODEL_FREQUENCY: int = 1024
     TRAINING_STEPS: int = 1024 * 20
@@ -25,19 +25,19 @@ class Config:
     GAMMA: float = 0.995
 
     # stable baselines3 env
-    ACTION_NVEC: int = 1
+    ACTION_NVEC: int = 2
     TERMINATE_THRESHOLD: float = 20.0 # degree
     WATIING_TIME_PER_STEP: float = 0.035 # second
 
     # env
-    SERVO_STEP_ANGLE: float = 1.0 # degree
+    SERVO_STEP_ANGLE: float = 0.01 # degree
 
     # action
     MAX_JOINT_ANGLE: float = 3.0 # degree
 
     # reward
     STABLE_REWARD_WEIGHT: float = 1.0 # positive
-    DELTA_CALF_ANGLE_REWARD_WEIGHT: float = -6000.0 # negative
+    DELTA_FOOT_ANGLE_REWARD_WEIGHT: float = -6000.0 # negative
     FLIP_BONUS: float = 60.0 # positive
 
     # waiting data time monitor
@@ -61,9 +61,10 @@ class Config:
     AVERATE_DURATION_STEPS_PLOT_PATH: str = "./plots/average_duration_steps_plot.png"
 
     # data dictionary keys
+    THIGH_ANGLE_KEY: str = "thigh_angle"
     CALF_ANGLE_KEY: str = "calf_angle"
-    TOP_ANGLE_KEY: str = "top_angle"
+    FOOT_ANGLE_KEY: str = "foot_angle"
 
     # noise level
-    OBS_NOISE_LEVEL: float = 0.5
-    ACTION_NOISE_LEVEL: float = 0.5
+    OBS_NOISE_LEVEL: float = 0.0
+    ACTION_NOISE_LEVEL: float = 0.0

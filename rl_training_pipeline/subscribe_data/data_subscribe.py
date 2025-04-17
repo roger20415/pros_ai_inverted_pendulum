@@ -8,8 +8,8 @@ from subscribe_data.unity_data_store import UnityDataStore
 
 class DataSubscriberNode(Node):
     def __init__(self, unity_data_store: UnityDataStore) -> None:
-        super().__init__("inverted_pendulum_data_subscriber_node")
-        self.get_logger().info("Start inverted pendulum data subscriber node.")
+        super().__init__("data_subscriber_node")
+        self.get_logger().info("Start data subscriber node.")
 
         self._last_pub_time: float = 0.0
         self._unity_data_store = unity_data_store
@@ -27,11 +27,11 @@ class DataSubscriberNode(Node):
         self._unity_data_store.split_and_store_received_array(msg)
         sys.stderr.write(f"\033[35m{msg.data}\033[0m\n")
         self._print_pub_sub_info(
-            msg.data[2],
             msg.data[3],
+            msg.data[4],
             now_seconds
         )
-        self._last_pub_time = msg.data[3]
+        self._last_pub_time = msg.data[4]
 
 
     def _print_pub_sub_info(self, fixupdate_count: float, pub_time: float, sub_time: float) -> None:

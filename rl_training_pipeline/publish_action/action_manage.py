@@ -27,6 +27,5 @@ class ActionManager:
         for joint_action in action:
             noise = random.uniform(-Config.ACTION_NOISE_LEVEL, Config.ACTION_NOISE_LEVEL)
             noisy_action.append(joint_action + noise)
-            print(f"Original: {joint_action}, Noise: {noise}, Noisy Action: {noisy_action[-1]}")
 
         return np.array(noisy_action)
