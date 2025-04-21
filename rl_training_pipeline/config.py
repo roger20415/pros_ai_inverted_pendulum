@@ -25,9 +25,9 @@ class Config:
     GAMMA: float = 0.995
 
     # stable baselines3 env
-    ACTION_NVEC: int = 2
-    TERMINATE_THRESHOLD: float = 20.0 # degree
-    WATIING_TIME_PER_STEP: float = 0.035 # second
+    ACTION_NVEC: int = 1
+    TERMINATE_THRESHOLD: float = 4.0 # degree
+    # WATIING_TIME_PER_STEP: float = 0.01 # second
 
     # env
     SERVO_STEP_ANGLE: float = 0.01 # degree
@@ -36,9 +36,9 @@ class Config:
     MAX_JOINT_ANGLE: float = 3.0 # degree
 
     # reward
-    STABLE_REWARD_WEIGHT: float = 1.0 # positive
+    STABLE_REWARD_WEIGHT: float = 6.0 # positive
     DELTA_FOOT_ANGLE_REWARD_WEIGHT: float = -6000.0 # negative
-    FLIP_BONUS: float = 60.0 # positive
+    FLIP_BONUS: float = 100.0 # positive
 
     # waiting data time monitor
     WAITING_TIME_STOP_THRESHOLD: int =  500000 # µs
