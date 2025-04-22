@@ -36,9 +36,9 @@ class Config:
     MAX_JOINT_ANGLE: float = 3.0 # degree
 
     # reward
-    STABLE_REWARD_WEIGHT: float = 6.0 # positive
-    DELTA_FOOT_ANGLE_REWARD_WEIGHT: float = -6000.0 # negative
-    FLIP_BONUS: float = 100.0 # positive
+    STABLE_REWARD_WEIGHT: float = 0.5 # positive
+    DELTA_FOOT_ANGLE_REWARD_WEIGHT: float = -42000.0 # negative
+    FLIP_BONUS: float = 500.0 # positive
 
     # waiting data time monitor
     WAITING_TIME_STOP_THRESHOLD: int =  500000 # µs

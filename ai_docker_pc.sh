@@ -1,7 +1,7 @@
 #!/bin/bash
 
 NETWORK_NAME="inverted_pendulum_bridge_network"
-IMAGE_NAME="pros_rl_image"
+IMAGE_NAME="registry.screamtrumpet.csie.ncku.edu.tw/unity_env/pros_rl_image"
 IMAGE_TAG="latest"
 ENV_FILE="./.env"
 WORKSPACE_PATH="$(pwd)/rl_training_pipeline"
@@ -16,15 +16,15 @@ create_network() {
     fi
 }
 
-build_image() {
-    echo "Checking if image $IMAGE_NAME exists..."
-    if ! docker images | grep -q "$IMAGE_NAME"; then
-        echo "Image $IMAGE_NAME not found, building it..."
-        docker build -t $IMAGE_NAME . || { echo "Failed to build image $IMAGE_NAME"; exit 1; }
-    else
-        echo "Image $IMAGE_NAME already exists."
-    fi
-}
+# build_image() {
+#     echo "Checking if image $IMAGE_NAME exists..."
+#     if ! docker images | grep -q "$IMAGE_NAME"; then
+#         echo "Image $IMAGE_NAME not found, building it..."
+#         docker build -t $IMAGE_NAME . || { echo "Failed to build image $IMAGE_NAME"; exit 1; }
+#     else
+#         echo "Image $IMAGE_NAME already exists."
+#     fi
+# }
 
 run_container() {
     echo "Running the Docker container with the image $IMAGE_NAME..."
@@ -38,7 +38,7 @@ run_container() {
 
 main() {
     create_network
-    build_image
+    #build_image
     run_container
 }
 
