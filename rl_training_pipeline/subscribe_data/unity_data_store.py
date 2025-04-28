@@ -14,7 +14,7 @@ class UnityDataStore:
         self._received_unity_data: dict[str, Float32] = {}
         
         self._if_data_ready_flags: dict[str, bool] = {
-            Config.CALF_ANGLE_KEY: False,
+            Config.FOUNDATION_ANGLE_KEY: False,
             Config.TOP_ANGLE_KEY: False,
         }
 
@@ -25,7 +25,7 @@ class UnityDataStore:
 
     def split_and_store_received_array(self, msg: Float32MultiArray) -> None:
         self._store_received_data(Config.TOP_ANGLE_KEY, msg.data[0])
-        self._store_received_data(Config.CALF_ANGLE_KEY, msg.data[1])
+        self._store_received_data(Config.FOUNDATION_ANGLE_KEY, msg.data[1])
 
         if self._check_if_all_data_ready():
             self._data_ready_event.set()

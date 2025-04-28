@@ -72,7 +72,7 @@ class InvertedPendulumEnv(gym.Env):
 
         print("\n-----------reset-------------\n")
         time.sleep(1.5)
-        self.reward_calculator.reset_pre_calf_angle()
+        self.reward_calculator.reset_pre_foundation_angle()
         self._reset_unity_scene()
         self._update_state()
 
@@ -84,9 +84,9 @@ class InvertedPendulumEnv(gym.Env):
         
     def _should_terminate(self, state: dict[str, float]) -> bool:
         terminated: bool = False
-        calf_angle: float = abs(state[Config.CALF_ANGLE_KEY])
+        foundation_angle: float = abs(state[Config.FOUNDATION_ANGLE_KEY])
         
-        if calf_angle > Config.TERMINATE_THRESHOLD:
+        if foundation_angle > Config.TERMINATE_THRESHOLD:
             terminated = True     
         return terminated
     

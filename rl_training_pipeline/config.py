@@ -26,18 +26,18 @@ class Config:
 
     # stable baselines3 env
     ACTION_NVEC: int = 1
-    TERMINATE_THRESHOLD: float = 20.0 # degree
-    WATIING_TIME_PER_STEP: float = 0.035 # second
+    TERMINATE_THRESHOLD: float = 5.0 # degree
+    WATIING_TIME_PER_STEP: float = 0.01 # second #0.035
 
     # env
-    SERVO_STEP_ANGLE: float = 1.8*3 # degree
+    SERVO_STEP_ANGLE: float = 0.001 # degree
 
     # action
     MAX_JOINT_ANGLE: float = 20.0 # degree
 
     # reward
     STABLE_REWARD_WEIGHT: float = 1.0 # positive
-    DELTA_CALF_ANGLE_REWARD_WEIGHT: float = -6000.0 # negative
+    DELTA_foundation_angle_REWARD_WEIGHT: float = -6000.0 # negative
     FLIP_BONUS: float = 60.0 # positive
 
     # waiting data time monitor
@@ -61,7 +61,7 @@ class Config:
     AVERATE_DURATION_STEPS_PLOT_PATH: str = "./plots/average_duration_steps_plot.png"
 
     # data dictionary keys
-    CALF_ANGLE_KEY: str = "calf_angle"
+    FOUNDATION_ANGLE_KEY: str = "foundation_angle"
     TOP_ANGLE_KEY: str = "top_angle"
 
     # noise level

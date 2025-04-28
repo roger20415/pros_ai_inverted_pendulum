@@ -29,7 +29,7 @@ class DataTransformer():
     def _decomposition_data(self, unity_data: dict[str, float]) -> dict[str, float]:
         data_decomposed: dict[str, float] = {
             Config.TOP_ANGLE_KEY: unity_data[Config.TOP_ANGLE_KEY],
-            Config.CALF_ANGLE_KEY: unity_data[Config.CALF_ANGLE_KEY],
+            Config.FOUNDATION_ANGLE_KEY: unity_data[Config.FOUNDATION_ANGLE_KEY],
         }
         return data_decomposed
     
@@ -42,13 +42,13 @@ class DataTransformer():
     
     def _add_pre_state(self, data_decomposed: dict[str, float]) -> dict[str, float]:
         data_decomposed["pre_"+Config.TOP_ANGLE_KEY] = self.pre_data_state.get(Config.TOP_ANGLE_KEY, 0)
-        data_decomposed["pre_"+Config.CALF_ANGLE_KEY] = self.pre_data_state.get(Config.CALF_ANGLE_KEY, 0)
+        data_decomposed["pre_"+Config.FOUNDATION_ANGLE_KEY] = self.pre_data_state.get(Config.FOUNDATION_ANGLE_KEY, 0)
     
         return data_decomposed
     
     def _add_prepre_state(self, data_decomposed: dict[str, float]) -> dict[str, float]:
         data_decomposed["prepre_"+Config.TOP_ANGLE_KEY] = self.prepre_data_state.get("pre_"+Config.TOP_ANGLE_KEY, 0)
-        data_decomposed["prepre_"+Config.CALF_ANGLE_KEY] = self.prepre_data_state.get("pre_"+Config.CALF_ANGLE_KEY, 0)
+        data_decomposed["prepre_"+Config.FOUNDATION_ANGLE_KEY] = self.prepre_data_state.get("pre_"+Config.FOUNDATION_ANGLE_KEY, 0)
     
         return data_decomposed
     
