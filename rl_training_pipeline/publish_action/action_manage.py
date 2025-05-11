@@ -26,7 +26,8 @@ class ActionManager:
         # elif action < -0.1:
         #     return np.array([-Config.SERVO_STEP_ANGLE])
         
-        return np.round(action / Config.SERVO_STEP_ANGLE) * Config.SERVO_STEP_ANGLE
+        #return np.round(action / Config.SERVO_STEP_ANGLE) * Config.SERVO_STEP_ANGLE
+        return action
 
     def _add_action_noise(self, action: np.ndarray) -> np.ndarray:
         noisy_action: list[float] = []
@@ -34,6 +35,6 @@ class ActionManager:
         for joint_action in action:
             noise = random.uniform(-Config.ACTION_NOISE_LEVEL, Config.ACTION_NOISE_LEVEL)
             noisy_action.append(joint_action + noise)
-            print(f"Original: {joint_action}, Noise: {noise}, Noisy Action: {noisy_action[-1]}")
+            #print(f"Original: {joint_action}, Noise: {noise}, Noisy Action: {noisy_action[-1]}")
 
         return np.array(noisy_action)

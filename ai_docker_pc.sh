@@ -1,7 +1,7 @@
 #!/bin/bash
 
 NETWORK_NAME="inverted_pendulum_bridge_network"
-IMAGE_NAME="pros_rl_image"
+IMAGE_NAME="registry.screamtrumpet.csie.ncku.edu.tw/unity_env/pros_rl_image"
 IMAGE_TAG="latest"
 ENV_FILE="./.env"
 WORKSPACE_PATH="$(pwd)/rl_training_pipeline"

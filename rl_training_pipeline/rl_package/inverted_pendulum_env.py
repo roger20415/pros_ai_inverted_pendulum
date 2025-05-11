@@ -46,8 +46,8 @@ class InvertedPendulumEnv(gym.Env):
         self._trigger_reset_if_updated_params()
         self.action_manager.process_and_publish_actions(action)
         self._update_state()
-        for key, value in self._state_dict.items():
-            print(f"{key}, {value}")
+        #for key, value in self._state_dict.items():
+        #    print(f"{key}, {value}")
         reward: float = self.reward_calculator.calculate_reward(self._state_dict, self._step_counter)
         if self._total_step_counter % Config.N_STEPS == 0:
             reward = 0.0
