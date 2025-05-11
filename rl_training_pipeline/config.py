@@ -59,6 +59,10 @@ class Config:
     REWARD_PLOT_PATH: str = "./plots/reward_plot.png"
     AVERAGE_REWARD_PLOT_PATH: str = "./plots/average_reward_plot.png"
 
+    COM_PLOT_PATH: str = "./plots/com_reward_plot.png"
+    STABLE_REWARD_PLOT_PATH: str = "./plots/stable_reward_plot.png"
+    COMBINED_REWARD_PLOT_PATH: str = "./plots/combined_reward_plot.png"
+
     # duration steps monitor
     DURATION_STEPS_PLOT_PATH: str = "./plots/duration_steps_plot.png"
     AVERATE_DURATION_STEPS_PLOT_PATH: str = "./plots/average_duration_steps_plot.png"

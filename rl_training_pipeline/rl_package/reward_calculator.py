@@ -17,7 +17,7 @@ class RewardCalculator:
         sys.stderr.write(f"delta_com_reward: {delta_com_reward}\n")
 
         self._previous_center_of_mass = center_of_mass
-        return reward
+        return reward, stable_reward, delta_com_reward
     
     def reset_previous_center_of_mass(self) -> None:
         self._previous_center_of_mass = 0.0

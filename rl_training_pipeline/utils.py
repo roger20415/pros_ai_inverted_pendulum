@@ -32,3 +32,19 @@ class Utils:
         plt.grid(True)
         plt.savefig(save_path)
         plt.close()
+
+    @staticmethod
+    def save_multi_plot(xdata, ydata_dict, title, xlabel, ylabel, save_path):
+        plt.figure(figsize=(10, 6))
+
+        for label, ydata in ydata_dict.items():
+            plt.plot(xdata, ydata, label=label)
+
+        plt.title(title)
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
+        plt.legend()
+        plt.grid(True)
+        plt.tight_layout()
+        plt.savefig(save_path)
+        plt.close()

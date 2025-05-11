@@ -45,11 +45,13 @@ class InvertedPendulumEnv(gym.Env):
     def step(self, action):
         self.action_manager.process_and_publish_actions(action)
         self._update_state()
-        reward: float = self.reward_calculator.calculate_reward(self._state_dict, self._step_counter)
+        reward, stable_reward, com_reward = self.reward_calculator.calculate_reward(self._state_dict, self._step_counter)
         if self._total_step_counter % Config.N_STEPS == 0:
             reward = 0.0
         terminated: bool = self._should_terminate(self._state_dict)
         self.reward_monitor.add_reward(reward)
+        self.reward_monitor.add_stable_reward(stable_reward)
+        self.reward_monitor.add_com_reward(com_reward)
         self.duration_steps_monitor.add_duration_steps()
         self._step_counter += 1
         self._total_step_counter += 1
@@ -62,7 +64,10 @@ class InvertedPendulumEnv(gym.Env):
         self.duration_steps_monitor.save_avg_duration_steps_plot(Config.AVERATE_DURATION_STEPS_PLOT_PATH)
         
         self.reward_monitor.save_reward_plot(Config.REWARD_PLOT_PATH)
+        self.reward_monitor.save_stable_reward_plot(Config.STABLE_REWARD_PLOT_PATH)
+        self.reward_monitor.save_com_reward_plot(Config.COM_PLOT_PATH)
         self.reward_monitor.save_avg_reward_plot(Config.AVERAGE_REWARD_PLOT_PATH)
+        self.reward_monitor.save_combined_reward_plot(Config.COMBINED_REWARD_PLOT_PATH)
 
         self._step_counter = 0
         self.data_manager.reset()
