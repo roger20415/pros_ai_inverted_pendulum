@@ -22,7 +22,7 @@ class RewardCalculator:
         sys.stderr.write(f"flip_bonus: {flip_bonus}\n")
 
         self._pre_foundation_angle = foundation_angle
-        return reward
+        return reward, stable_reward, delta_foundation_angle_reward, flip_bonus
     
     def reset_pre_foundation_angle(self) -> None:
         self._pre_foundation_angle = 0.0
@@ -34,7 +34,7 @@ class RewardCalculator:
         projection_foundation_angle: float = abs(self._map_angle_to_x(foundation_angle))
         projection_pre_foundation_angle: float = abs(self._map_angle_to_x(self._pre_foundation_angle))
         delta_foundation_angle_reward: float = ((projection_foundation_angle - projection_pre_foundation_angle)
-                                        *Config.DELTA_foundation_angle_REWARD_WEIGHT)
+                                        *Config.DELTA_FOUNDATION_ANGLE_REWARD_WEIGHT)
         return delta_foundation_angle_reward
     
     def _cal_flip_bonus(self, foundation_angle: float) -> float:

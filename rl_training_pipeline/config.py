@@ -15,7 +15,7 @@ class Config:
     SAVE_MODEL_PATH: str = "./rl_package/Model/inverted_pendulum_PPO_2024-11-20.pt"
     
     SAVE_MODEL_FREQUENCY: int = 1024
-    TRAINING_STEPS: int = 1024 * 20
+    TRAINING_STEPS: int = 1024 * 3
     LOG_INTERVAL: int = 1
     
     LEARNING_RATE: float = 0.001
@@ -37,8 +37,8 @@ class Config:
 
     # reward
     STABLE_REWARD_WEIGHT: float = 1.0 # positive
-    DELTA_foundation_angle_REWARD_WEIGHT: float = -6000.0 # negative
-    FLIP_BONUS: float = 60.0 # positive
+    DELTA_FOUNDATION_ANGLE_REWARD_WEIGHT: float = -7000.0 # negative
+    FLIP_BONUS: float = 0.0 # positive
 
     # waiting data time monitor
     WAITING_TIME_STOP_THRESHOLD: int =  500000 # µs
@@ -55,7 +55,9 @@ class Config:
     # reward monitor
     REWARD_PLOT_PATH: str = "./plots/reward_plot.png"
     AVERAGE_REWARD_PLOT_PATH: str = "./plots/average_reward_plot.png"
-
+    FOUNDATION_ANGLE_REWARD_PLOT_PATH: str = "./plots/foundations_angle_reward_plot.png"
+    FLIP_BONUS_PLOT_PATH: str = "./plots/flip_bonus_plot.png"
+    COMBINED_REWARD_PLOT_PATH: str = "./plots/combined_reward_plot.png"
     # duration steps monitor
     DURATION_STEPS_PLOT_PATH: str = "./plots/duration_steps_plot.png"
     AVERATE_DURATION_STEPS_PLOT_PATH: str = "./plots/average_duration_steps_plot.png"
